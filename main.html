@@ -8,41 +8,57 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
     <link rel="stylesheet" type="text/css" href="css/main.css">
+    <style>
+        .nav {
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: -1;
+            width: 100%;
+        }
+        .profile-img-card {
+            width: 80px;
+            height: 80px;
+            margin: 10px;
+            -moz-border-radius: 50%;
+            -webkit-border-radius: 50%;
+            border-radius: 50%;
+        }
+    </style>
 </head>
-<body>
+<body style="background-color: #FFFFFF">
+<div class="nav" style="height: 100px; background-color: #ebefe9; top: 0; z-index: -1" align="right">
+    <img class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+</div>
 <div class="wrapper">
-
-    <!-- Sidebar -->
     <nav id="sidebar">
-        <!-- Sidebar Header -->
-        <div class="sidebar-header">
-            <h3>Collapsible Sidebar</h3>
+        <div class="sidebar-header" align="center">
+            <img src="images/iconlogo.png" alt="" style="width: 150px">
         </div>
-
-        <!-- Sidebar Links -->
         <ul class="list-unstyled components">
             <li class="active">
                 <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Alumnos</a>
                 <ul class="collapse list-unstyled" id="homeSubmenu">
-                    <li><a href="#">Ficha de matrícula</a></li>
-                    <li><a href="#">Estado de cuenta</a></li>
-                    <li><a href="#">Registro de notas</a></li>
+                    <li><a href="#"  style="background-color: #ebefe9">Ficha de matrícula</a></li>
+                    <li><a href="#"  style="background-color: #ebefe9">Estado de cuenta</a></li>
+                    <li><a href="#"  style="background-color: #ebefe9">Registro de notas</a></li>
                 </ul>
             </li>
             <li><a href="#">Títulos</a></li>
-
             <li><a href="#">Convenios</a></li>
             <li><a href="#">Tu cuenta</a></li>
             <li><a href="#"><span class="glyphicon glyphicon-off" style="top: 2px"></span>  Cerrar sesión</a></li>
         </ul>
     </nav>
-
-    <!-- Page Content -->
-    <div id="content">
+    <div id="content" style="margin-top: 20px;">
         <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
             <i class="glyphicon glyphicon-align-left"></i>
             Toggle Sidebar
         </button>
+        <br>
+        <br>
+        <br>
+rwtfghjk
     </div>
 
 </div>

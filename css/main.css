@@ -47,16 +47,14 @@ a[aria-expanded="true"]::before {
 /*
     ADDITIONAL DEMO STYLE, NOT IMPORTANT TO MAKE THINGS WORK BUT TO MAKE IT A BIT NICER :)
 */
-@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
-
 
 body {
-    font-family: 'Poppins', sans-serif;
-    background: #fafafa;
+    font-family: 'Poppins';
+    background: #FFFFFF;
 }
 
 p {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins';
     font-size: 1.1em;
     font-weight: 300;
     line-height: 1.7em;
@@ -102,12 +100,35 @@ a, a:hover, a:focus {
     background: #0f0f0f;
 }
 
-#sidebar ul li.active > a, a[aria-expanded="true"] {
-    color: #0f0f0f;
-    background: #FFFFFF;
+#sidebar ul li.active > a {
+     color: #FFFFFF;
+     background: #47525e;
+ }
+#sidebar ul li.active > a[aria-expanded="true"] {
+    color: red;
+    background-color: #47525e;
 }
 ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
     background: red;
+}
+
+
+.nav {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    width: 100%;
+    height: 100px;
+    background-color: #ebefe9;
+}
+.profile-img-card {
+    width: 80px;
+    height: 80px;
+    margin: 10px;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
 }

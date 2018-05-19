@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Web Taylor</title>
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <style>
+        input[type=text]{
+            height: 50px;
+        }
+        td,th {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="nav" style="" align="right">
+    <label>USERNAME</label>
+    <img class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+</div>
+<div class="wrapper">
+    <nav id="sidebar">
+        <div class="sidebar-header" align="center">
+            <img src="images/iconlogo.png" alt="" style="width: 150px">
+        </div>
+        <ul class="list-unstyled components">
+            <li>
+                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Alumnos</a>
+                <ul class="collapse list-unstyled" id="homeSubmenu">
+                    <li><a href="fichaMatricula.html"  style="background-color: #ebefe9">Ficha de matrícula</a></li>
+                    <li><a href="#"  style="background-color: #ebefe9">Estado de cuenta</a></li>
+                    <li><a href="#"  style="background-color: #ebefe9">Registro de notas</a></li>
+                </ul>
+            </li>
+            <li  class="active"><a href="titulos.html">Títulos</a></li>
+            <li><a href="convenios.html">Convenios</a></li>
+            <li><a href="#">Tu cuenta</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-off" style="top: 2px"></span>  Cerrar sesión</a></li>
+        </ul>
+    </nav>
+    <div id="content" style="margin-top: 20px; width: 100%">
+        <!--<button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
+            <i class="glyphicon glyphicon-align-left"></i>
+            Toggle Sidebar
+        </button>-->
+        <br><br><br>
+        <div class="row-fluid" style="padding: 40px; width: 100%">
+            <div class="col-md-12">
+                <h1>Títulos</h1>
+
+            </div>
+            <div class="col-md-6" style="top:15px">
+                <div class="form-group">
+                    <label for="nombreCompleto">Nombre completo</label>
+                    <input type="text" class="form-control" id="nombreCompleto" placeholder="Apellidos y nombres">
+                </div>
+            </div>
+            <div class="col-md-6" style="top:15px">
+                <div class="form-group">
+                    <label for="dni">Documento de identidad</label>
+                    <input type="text" class="form-control" id="dni" placeholder="DNI">
+                </div>
+            </div>
+            <div class="col-md-4" style="top:15px">
+                <div class="form-group">
+                    <label for="carrera">Carrera</label>
+                    <input type="text" class="form-control" id="carrera" placeholder="Carrera">
+                </div>
+            </div>
+            <div class="col-md-4" style="top:15px">
+                <div class="form-group">
+                    <label for="dni">telefono</label>
+                    <input type="text" class="form-control" id="telefono" placeholder="Teléfono">
+                </div>
+            </div>
+            <div class="col-md-4" style="top:15px">
+                <div class="form-group">
+                    <label for="celular">Celular</label>
+                    <input type="text" class="form-control" id="celular" placeholder="Celular">
+                </div>
+            </div>
+            <div class="col-md-2" style="top:15px">
+                <div class="form-group">
+                    <label for="sede">Sede</label>
+                    <input type="text" class="form-control" id="sede" placeholder="Sede">
+                </div>
+            </div>
+            <div class="col-md-5" style="top:15px">
+                <div class="form-group">
+                    <label for="iniciotermino">Inicio/término</label>
+                    <input type="text" class="form-control" id="iniciotermino" placeholder="Inicio/término">
+                </div>
+            </div>
+            <div class="col-md-5" style="top:15px">
+                <div class="form-group">
+                    <label for="obs">Observaciones</label>
+                    <input type="text" class="form-control" id="obs" placeholder="Observaciones">
+                </div>
+            </div>
+            <div class="col-md-12" style="top:15px" align="right">
+                <button type="button" class="btn" style="background-color: #47525e; color: #FFFFFF; width: 180px">Cancelar</button>
+                <button type="button" class="btn" style="background-color: #47525e; color: #FFFFFF; width: 180px">Agregar</button>
+
+            </div>
+            <div class="col-md-12" style="top: 40px;">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">DNI</th>
+                        <th scope="col">Teléfono</th>
+                        <th scope="col">Celular</th>
+                        <th scope="col">Carrera</th>
+                        <th scope="col">Seguimiento</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Convenio1</td>
+                        <td>Convenio1</td>
+                        <td>Convenio1</td>
+                        <td>Administración</td>
+                        <td>HospitalNombre</td>
+                        <td>
+                            <label style="color: #63de83;"> Recibido</label>
+                            <span class="glyphicon glyphicon-edit"></span>
+                            <span class="glyphicon glyphicon-floppy-disk"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Convenio2</td>
+                        <td>Convenio2</td>
+                        <td>Convenio2</td>
+                        <td>Enfermería</td>
+                        <td>UnivNombre</td>
+                        <td>
+                            <label style="color: #ebbd30;">En espera</label>
+                            <span class="glyphicon glyphicon-edit"></span>
+                            <span class="glyphicon glyphicon-floppy-disk"></span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+</body>
+</html>

@@ -99,48 +99,31 @@
                     </tr>
                     </thead>
                     <tbody>
+                    <?php
+    $query = mysqli_query(conectar(),"select * from alumnos")or die(mysqli_error(conectar()));
+    while($row = mysqli_fetch_array($query)) {
+        $id = $row['id_alumno'];
+        ?>
                     <tr>
-                        <th scope="row">1</th>
-                        <td>Convenio1</td>
-                        <td>10/05/20</td>
-                        <td>HospitalNombre</td>
-                        <td><span class="glyphicon glyphicon-download-alt"></span></td>
+                        <td><?php echo $row['cod_alumno']?></td>
+                        <td><?php echo $row['nombres']; ?></td>
+                        <td><?php echo $row['ape_paterno']; ?></td>
+                        <td><?php echo $row['ape_materno']; ?></td>
+                        <td><?php echo $row['nivel']; ?></td>
+                        <td><?php echo $row['grado']; ?></td>
+                        <td><?php echo $row['telefono']; ?></td>
+                        <td><?php echo $row['email']; ?></td>
+                        <td><input id="abajo" onclick="myFunction(<?php echo $id?>)" name="<?php echo $id?>" class="btn btn-info" style="width: 40px" value="Editar"></td>
                     </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Convenio2</td>
-                        <td>10/05/20</td>
-                        <td>UnivNombre</td>
-                        <td><span class="glyphicon glyphicon-download-alt"></span></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Convenio3</td>
-                        <td>10/05/20</td>
-                        <td>HospitalNombre</td>
-                        <td><span class="glyphicon glyphicon-download-alt"></span></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">4</th>
-                        <td>Convenio4</td>
-                        <td>10/05/20</td>
-                        <td>UnivNombre</td>
-                        <td><span class="glyphicon glyphicon-download-alt"></span></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">5</th>
-                        <td>Convenio5</td>
-                        <td>10/05/20</td>
-                        <td>HospitalNombre</td>
-                        <td><span class="glyphicon glyphicon-download-alt"></span></td>
-                    </tr>
+                    <?php
+    }
+    ?>
                     </tbody>
                 </table>
             </div>
         </div>
 
     </div>
-
+<?php
 </div>
-</body>
 </html>

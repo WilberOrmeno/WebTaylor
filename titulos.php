@@ -31,7 +31,7 @@
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Alumnos</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
                         <li><a href="fichaMatricula.html"  style="background-color: #ebefe9">Ficha de matrícula</a></li>
-                        <li><a href="#"  style="background-color: #ebefe9">Estado de cuenta</a></li>
+                        <li><a href="estadoCuenta.html"  style="background-color: #ebefe9">Estado de cuenta</a></li>
                         <li><a href="#"  style="background-color: #ebefe9">Registro de notas</a></li>
                     </ul>
                 </li>

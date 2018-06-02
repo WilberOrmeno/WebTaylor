@@ -30,8 +30,8 @@
                 <li>
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Alumnos</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
-                        <li><a href="fichaMatricula.html"  style="background-color: #ebefe9">Ficha de matrícula</a></li>
-                        <li><a href="estadoCuenta.html"  style="background-color: #ebefe9">Estado de cuenta</a></li>
+                        <li><a href="fichaMatricula.php" style="background-color: #ebefe9">Ficha de matrícula</a></li>
+                        <li><a href="estadoCuenta.php" style="background-color: #ebefe9">Estado de cuenta</a></li>
                         <li><a href="#"  style="background-color: #ebefe9">Registro de notas</a></li>
                     </ul>
                 </li>
@@ -42,10 +42,10 @@
             </ul>
         </nav>
         <div id="content" style="margin-top: 10px; width: 100%">
-            <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
+            <!--<button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
                 <i class="glyphicon glyphicon-align-left"></i>
                 Toggle Sidebar
-            </button>
+            </button>-->
             <br><br><br>
             <div class="row-fluid" style="padding: 20px; width: 100%">
                 <div class="col-md-12">
@@ -168,7 +168,7 @@
             url:   'saveTitulo.php',
             type:  'post',
             beforeSend: function () {
-                $.jGrowl("loading", { header: 'Wardando' });
+
             },
             success:  function (response) {
                 $.jGrowl("Registro guardado con éxito", { header: 'Guardado' });

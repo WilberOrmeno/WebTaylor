@@ -9,6 +9,9 @@
     <script src="js/main.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script src="dist/min/dropzone.min.js"></script>
+    <link rel="stylesheet" href="dist/min/dropzone.min.css">
+
 </head>
 <body>
 <div class="nav" style="" align="right">
@@ -24,8 +27,8 @@
             <li>
                 <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Alumnos</a>
                 <ul class="collapse list-unstyled" id="homeSubmenu">
-                    <li><a href="fichaMatricula.html"  style="background-color: #ebefe9">Ficha de matrícula</a></li>
-                    <li><a href="estadoCuenta.html"  style="background-color: #ebefe9">Estado de cuenta</a></li>
+                    <li><a href="fichaMatricula.php" style="background-color: #ebefe9">Ficha de matrícula</a></li>
+                    <li><a href="estadoCuenta.php" style="background-color: #ebefe9">Estado de cuenta</a></li>
                     <li><a href="#"  style="background-color: #ebefe9">Registro de notas</a></li>
                 </ul>
             </li>
@@ -63,18 +66,17 @@
                 </div>
 
             </div>
-            <div class="col-md-7" style="top:15px" align="right">
-                <div style=" width: 500px; height: 180px; margin-bottom:10px; border: 1.5px dashed #0f0f0f " align="right">
-                    <div class="col-md-4" align="center" style="top: 20px;">
-                        <img src="images/file.png" alt=""><br>
-                        Convenios
-                    </div>
-                    <div class="col-md-8"  align="left" style="top:50px">
 
+            <div class="col-md-7" style="left: 30px ;top:15px" align="right">
+                <form action="/file-upload" class="dropzone" style="width: 500px; height: 180px; margin-bottom: 30px" >
+                    <img src="images/file.png" alt="" style="position: absolute; left: 90px;"><br>
+                    <div class="fallback" >
+                        <input name="file" type="file" multiple />
                         <button type="button" class="btn btn-lg" style="background-color: #47525e; color: #FFFFFF; width: 180px">Subir archivo</button>
-                        <br> Se permiten archivos .doc .pdf .jpg
+
                     </div>
-                </div>
+                </form>
+
                 <button type="button" class="btn btn-lg" style="background-color: #47525e; color: #FFFFFF; width: 180px">Cancelar</button>
                 <button type="button" class="btn btn-lg" style="background-color: #47525e; color: #FFFFFF; width: 180px">Agregar</button>
 
@@ -134,5 +136,56 @@
     </div>
 
 </div>
+<script>
+    function dropHandler(ev) {
+        console.log('File(s) dropped');
+
+        // Prevent default behavior (Prevent file from being opened)
+        ev.preventDefault();
+
+        if (ev.dataTransfer.items) {
+            // Use DataTransferItemList interface to access the file(s)
+            for (var i = 0; i < ev.dataTransfer.items.length; i++) {
+                // If dropped items aren't files, reject them
+                if (ev.dataTransfer.items[i].kind === 'file') {
+                    var file = ev.dataTransfer.items[i].getAsFile();
+                    console.log('... file[' + i + '].name = ' + file.name);
+                }
+            }
+        } else {
+            // Use DataTransfer interface to access the file(s)
+            for (var i = 0; i < ev.dataTransfer.files.length; i++) {
+                console.log('... file[' + i + '].name = ' + ev.dataTransfer.files[i].name);
+            }
+        }
+
+        // Pass event to removeDragData for cleanup
+        removeDragData(ev)
+    }
+    function dragOverHandler(ev) {
+        console.log('File(s) in drop zone');
+
+        // Prevent default behavior (Prevent file from being opened)
+        ev.preventDefault();
+    }
+    function removeDragData(ev) {
+        console.log('Removing drag data')
+
+        if (ev.dataTransfer.items) {
+            // Use DataTransferItemList interface to remove the drag data
+            ev.dataTransfer.items.clear();
+        } else {
+            // Use DataTransfer interface to remove the drag data
+            ev.dataTransfer.clearData();
+        }
+    }
+</script>
+<style>
+    #drop_zone {
+        border: 5px solid blue;
+        width:  200px;
+        height: 100px;
+    }
+</style>
 </body>
 </html>

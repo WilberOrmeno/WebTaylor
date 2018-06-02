@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-06-2018 a las 17:11:50
+-- Tiempo de generación: 02-06-2018 a las 17:18:26
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.3
 
@@ -67,7 +67,7 @@ CREATE TABLE `alumnos` (
 --
 
 INSERT INTO `alumnos` (`id_alumno`, `nombre`, `sexo`, `eCivil`, `DepartamentoNac`, `ProvinciaNac`, `DistritoNac`, `fecnac`, `edad`, `direccion`, `DistritoDireccion`, `telefono`, `celular`, `email`, `IESecundaria`, `otroCS`) VALUES
-(1, 'Elvis Velasque Espinoza', 'Masculino', 'Soltero', 'Lima', 'Lima', 'Lima', '11/02/1996', 22, 'aaaaaaaaa', 'Lima', '987456321', '987456321', 'elvis@gmail.com', 'Colegio aaa', 'bbbb'),
+(1, 'Javier Ormeño Vera', 'Masculino', 'Soltero', 'Lima', 'Lima', 'Lima', '11/02/1996', 22, 'aaaaaaaaa', 'Lima', '987456321', '987456321', 'javier@gmail.com', 'Colegio aaa', 'bbbb'),
 (2, 'Marcela Andrade Salinas', 'Femenino', 'Soltero', 'Lima', 'Lima', 'Lima', '11/02/1996', 22, 'aaaaaaaaa', 'Lima', '789456123', '987456321', 'marcela@gmail.com', 'Colegio aaa', 'bbbb');
 
 -- --------------------------------------------------------
@@ -126,7 +126,7 @@ CREATE TABLE `recibos` (
 --
 
 INSERT INTO `recibos` (`id_alumno`, `nombres`, `ape_paterno`, `ape_materno`, `nro_matricula`, `especialidad`, `turno`, `semestre`, `recibo`, `fecha`, `cantidad`, `concepto`, `observaciones`) VALUES
-(1, 'Elvis', 'Velasque', 'Espinoza', 123, 'Computación', 'Mañana', 'I Semestre', '001', '31/03/18', '500', 'Pago1', 'Pago del primer mes'),
+(1, 'Javier', 'Ormeño', 'Vera', 123, 'Computación', 'Mañana', 'I Semestre', '001', '31/03/18', '500', 'Pago1', 'Pago del primer mes'),
 (2, 'Marcela', 'Andrade', 'Salinas', 124, 'Enfermería', 'Tarde', 'II Semestre', '123', '31/03/18', '600', 'Pago1', 'Pago del primer mes');
 
 -- --------------------------------------------------------
@@ -153,8 +153,9 @@ CREATE TABLE `titulos` (
 --
 
 INSERT INTO `titulos` (`id_titulo`, `nombres`, `dni`, `carrera`, `telefono`, `celular`, `sede`, `inicio/termino`, `observaciones`, `seguimiento`) VALUES
-(1, 'Elvis Velasque Espinoza', '72416642', 'Computación', '994318344', '994318344', 'Lima', '---', '----', 1),
-(2, 'Marcela Andrade Salinas', '72416642', 'Enfemería	', '994318344', '994318344', 'Lima', '----', '----', 0);
+(1, 'Javier OrmeÃ±o Vera', '72416642', 'ComputaciÃ³n', '994318344', '994318344', 'Lima', '---', '----', 1),
+(2, 'Marcela Andrade Salinas', '72416642', 'EnfemerÃ¡a	', '994318344', '994318344', 'Lima', '----', '----', 0),
+(3, 'Elvis Velasque Espinoza', '98745632', 'ComputaciÃ³n', '987654312', '987654312', 'Lima', '----', '----', 0);
 
 --
 -- Índices para tablas volcadas
@@ -222,7 +223,7 @@ ALTER TABLE `recibos`
 -- AUTO_INCREMENT de la tabla `titulos`
 --
 ALTER TABLE `titulos`
-  MODIFY `id_titulo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_titulo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

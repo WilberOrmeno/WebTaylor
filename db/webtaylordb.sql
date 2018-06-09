@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-06-2018 a las 17:18:26
+-- Tiempo de generación: 09-06-2018 a las 17:51:31
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.3
 
@@ -102,6 +102,43 @@ INSERT INTO `datosacademicos` (`id`, `id_alumno`, `especialidad`, `ciclo`, `turn
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `notas`
+--
+
+CREATE TABLE `notas` (
+  `id` int(11) NOT NULL,
+  `carrera` varchar(50) NOT NULL,
+  `modulo` varchar(100) NOT NULL,
+  `denominacion` varchar(20) NOT NULL,
+  `docente` varchar(50) NOT NULL,
+  `periodo` varchar(20) NOT NULL,
+  `creditos` varchar(20) NOT NULL,
+  `horas` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `notasdetalle`
+--
+
+CREATE TABLE `notasdetalle` (
+  `id` int(11) NOT NULL,
+  `idNotas` int(11) NOT NULL,
+  `alumno` varchar(50) NOT NULL,
+  `c1` varchar(2) NOT NULL,
+  `c2` varchar(2) NOT NULL,
+  `c3` varchar(2) NOT NULL,
+  `c4` varchar(2) NOT NULL,
+  `c5` varchar(2) NOT NULL,
+  `c6` varchar(2) NOT NULL,
+  `c7` varchar(2) NOT NULL,
+  `c8` varchar(2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `recibos`
 --
 
@@ -180,6 +217,18 @@ ALTER TABLE `datosacademicos`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `notas`
+--
+ALTER TABLE `notas`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `notasdetalle`
+--
+ALTER TABLE `notasdetalle`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `recibos`
 --
 ALTER TABLE `recibos`
@@ -214,16 +263,28 @@ ALTER TABLE `datosacademicos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT de la tabla `notas`
+--
+ALTER TABLE `notas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `notasdetalle`
+--
+ALTER TABLE `notasdetalle`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `recibos`
 --
 ALTER TABLE `recibos`
-  MODIFY `id_alumno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_alumno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `titulos`
 --
 ALTER TABLE `titulos`
-  MODIFY `id_titulo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_titulo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

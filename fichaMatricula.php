@@ -61,7 +61,7 @@
                 <ul class="list-unstyled" id="homeSubmenu">
                     <li class="active"  ><a href="fichaMatricula.php" style="background-color: #47525e">Ficha de matrícula</a></li>
                     <li><a href="estadoCuenta.php" style="background-color: #ebefe9">Estado de cuenta</a></li>
-                    <li><a href="#"  style="background-color: #ebefe9">Registro de notas</a></li>
+                    <li><a href="registroNotas.php"  style="background-color: #ebefe9">Registro de notas</a></li>
                 </ul>
             </li>
             <li  ><a href="titulos.php">Títulos</a></li>

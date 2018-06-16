@@ -73,17 +73,17 @@
 
             <div class="col-md-7" style="left: 30px ;top:15px" align="right">
                <div style=" width: 500px; height: 180px; margin-bottom:10px; border: 1.5px dashed #0f0f0f " align="right">
-                              <div class="col-md-4" align="center" style="top: 20px;">
-                               <img src="images/file.png" alt=""><br>
-                               Convenios
-                           </div>
-                       <div class="col-md-8"  align="left" style="top:50px">
+                      <div class="col-md-4" align="center" style="top: 20px;" id="div1">
+                           <img src="images/file.png" alt=""><br>
+                           Convenios
+                       </div>
+                       <div class="col-md-8"  align="left" style="top:50px" id="div2">
 
-                       <button type="button" class="btn btn-lg" onclick="$('#docConvenio').click()" style="background-color: #47525e; color: #FFFFFF; width: 180px">Subir archivo</button>
-                           <input type="file" name="docConvenio" id="docConvenio" style="display: none;">
-                       <br> Se permiten archivos .doc .pdf .jpg
-                   </div>
-                   </div>
+                           <button type="button" class="btn btn-lg" onclick="$('#docConvenio').click()" style="background-color: #47525e; color: #FFFFFF; width: 180px">Subir archivo</button>
+                               <input type="file" name="docConvenio" id="docConvenio" style="display: none;">
+                           <br> Se permiten archivos .doc .pdf .jpg
+                       </div>
+                </div>
                 <button type="button" class="btn btn-lg" style="background-color: #47525e; color: #FFFFFF; width: 180px">Cancelar</button>
                 <input type="submit" class="btn btn-lg" value="Agregar" style="background-color: #47525e; color: #FFFFFF; width: 180px"/>
             </div>
@@ -98,6 +98,12 @@
 </div>
 </body>
 <script type="application/javascript">
+    $("document").ready(function(){
+        $("#docConvenio").change(function() {
+            $("#div1").hide();
+            $("#div2").hide();
+        });
+    });
     $(function(){
         $("#formuploadajax").on("submit", function(e){
             e.preventDefault();
@@ -113,10 +119,10 @@
                 contentType: false,
                 processData: false
             })
-                .done(function(res){
-                    $.jGrowl("Registro agregado con éxito", { header: 'Agregado' });
-                    setTimeout(location.reload.bind(location), 1500);
-                });
+            .done(function(res){
+                $.jGrowl("Registro agregado con éxito", { header: 'Agregado' });
+                setTimeout(location.reload.bind(location), 1500);
+            });
         });
     });
 </script>

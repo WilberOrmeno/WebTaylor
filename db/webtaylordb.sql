@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-06-2018 a las 17:51:31
+-- Tiempo de generación: 16-06-2018 a las 22:38:20
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.3
 
@@ -69,6 +69,29 @@ CREATE TABLE `alumnos` (
 INSERT INTO `alumnos` (`id_alumno`, `nombre`, `sexo`, `eCivil`, `DepartamentoNac`, `ProvinciaNac`, `DistritoNac`, `fecnac`, `edad`, `direccion`, `DistritoDireccion`, `telefono`, `celular`, `email`, `IESecundaria`, `otroCS`) VALUES
 (1, 'Javier Ormeño Vera', 'Masculino', 'Soltero', 'Lima', 'Lima', 'Lima', '11/02/1996', 22, 'aaaaaaaaa', 'Lima', '987456321', '987456321', 'javier@gmail.com', 'Colegio aaa', 'bbbb'),
 (2, 'Marcela Andrade Salinas', 'Femenino', 'Soltero', 'Lima', 'Lima', 'Lima', '11/02/1996', 22, 'aaaaaaaaa', 'Lima', '789456123', '987456321', 'marcela@gmail.com', 'Colegio aaa', 'bbbb');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `convenios`
+--
+
+CREATE TABLE `convenios` (
+  `id` int(11) NOT NULL,
+  `convenio` varchar(30) NOT NULL,
+  `entidad` varchar(30) NOT NULL,
+  `vencimiento` varchar(30) NOT NULL,
+  `rutaConvenio` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `convenios`
+--
+
+INSERT INTO `convenios` (`id`, `convenio`, `entidad`, `vencimiento`, `rutaConvenio`) VALUES
+(1, 'Convenio1.docx', 'Hospital Test1', '11/12/18', 'DocConvenios/Convenio1.docx'),
+(2, 'Convenio2.docx', 'Universidad Test1', '08/01/17', 'DocConvenios/Convenio2.docx'),
+(3, 'Convenio3.docx', 'Hospital Test2', '19/02/18', 'DocConvenios/Convenio3.docx');
 
 -- --------------------------------------------------------
 
@@ -211,6 +234,12 @@ ALTER TABLE `alumnos`
   ADD PRIMARY KEY (`id_alumno`);
 
 --
+-- Indices de la tabla `convenios`
+--
+ALTER TABLE `convenios`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `datosacademicos`
 --
 ALTER TABLE `datosacademicos`
@@ -255,6 +284,12 @@ ALTER TABLE `actividadesextracurriculares`
 --
 ALTER TABLE `alumnos`
   MODIFY `id_alumno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `convenios`
+--
+ALTER TABLE `convenios`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `datosacademicos`

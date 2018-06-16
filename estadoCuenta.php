@@ -34,7 +34,7 @@
                 </ul>
             </li>
             <li  ><a href="titulos.php">Títulos</a></li>
-            <li><a href="convenios.html">Convenios</a></li>
+            <li><a href="convenios.php">Convenios</a></li>
             <li><a href="miCuenta.html">Tu cuenta</a></li>
             <li><a href="#"><span class="glyphicon glyphicon-off" style="top: 2px"></span>  Cerrar sesión</a></li>
         </ul>

@@ -73,16 +73,27 @@
 
             <div class="col-md-7" style="left: 30px ;top:15px" align="right">
                <div style=" width: 500px; height: 180px; margin-bottom:10px; border: 1.5px dashed #0f0f0f " align="right">
-                      <div class="col-md-4" align="center" style="top: 20px;" id="div1">
-                           <img src="images/file.png" alt=""><br>
-                           Convenios
-                       </div>
-                       <div class="col-md-8"  align="left" style="top:50px" id="div2">
+                  <div class="col-md-4" align="center" style="top: 20px;" id="div1">
+                       <img src="images/file.png" alt=""><br>
+                       Convenios
+                    </div>
+                    <div class="col-md-8"  align="left" style="top:50px" id="div2">
+                       <button type="button" class="btn" onclick="$('#docConvenio').click()" style="background-color: #47525e; color: #FFFFFF; width: 180px">Subir archivo</button>
+                           <input type="file" name="docConvenio" id="docConvenio" style="display: none;"
+                                  accept="application/pdf,.doc,.docx, image/*">
+                       <br> Se permiten archivos .doc .docx .pdf .jpg
+                    </div>
+                   <div class="col-md-4" align="center" style="top: 20px; display: none" id="div3">
+                       <img src="images/file.png" id="cargado" style="width: 100px; margin-top: 25px"><br>
+                   </div>
+                   <div class="col-md-8"  align="left" style="top:50px; display: none" id="div4">
+                       Archivo Cargado:
+                       <br>
+                       <label id="fileName"></label><br>
+                       <button type="button" class="btn" onclick="$('#docConvenio').click()"
+                               style="background-color: #47525e; color: #FFFFFF; width: 180px">Cambiar archivo</button>
 
-                           <button type="button" class="btn btn-lg" onclick="$('#docConvenio').click()" style="background-color: #47525e; color: #FFFFFF; width: 180px">Subir archivo</button>
-                               <input type="file" name="docConvenio" id="docConvenio" style="display: none;">
-                           <br> Se permiten archivos .doc .pdf .jpg
-                       </div>
+                   </div>
                 </div>
                 <button type="button" class="btn btn-lg" style="background-color: #47525e; color: #FFFFFF; width: 180px">Cancelar</button>
                 <input type="submit" class="btn btn-lg" value="Agregar" style="background-color: #47525e; color: #FFFFFF; width: 180px"/>
@@ -102,6 +113,20 @@
         $("#docConvenio").change(function() {
             $("#div1").hide();
             $("#div2").hide();
+            $("#div3").show();
+            $("#div4").show();
+            var filename = $('input[type=file]').val().replace(/C:\\fakepath\\/i, '')
+            $("#fileName").text(filename);
+            var ext = filename.split('.')
+            if(ext[ext.length-1] == "doc" ||ext[ext.length-1] == "docx"  ){
+                $("#cargado").attr("src","images/word.png");
+            }
+            if(ext[ext.length-1] == "pdf" ){
+                $("#cargado").attr("src","images/pdf.png");
+            }
+            if(ext[ext.length-1] == "jpg" || ext[ext.length-1] == "png" || ext[ext.length-1] == "jpeg"){
+                $("#cargado").attr("src","images/image.png");
+            }
         });
     });
     $(function(){

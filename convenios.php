@@ -18,7 +18,8 @@
 
 <body>
 <div class="nav" style="" align="right">
-    <label>USERNAME</label>
+    <label><?php     session_start();
+        echo $_SESSION['user'] ?></label>
     <img class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
 </div>
 <div class="wrapper">
@@ -37,7 +38,7 @@
             </li>
             <li><a href="titulos.php">Títulos</a></li>
             <li  class="active"><a href="convenios.php">Convenios</a></li>
-            <li><a href="miCuenta.html">Tu cuenta</a></li>
+            <li><a href="miCuenta.php">Tu cuenta</a></li>
             <li><a href="#"><span class="glyphicon glyphicon-off" style="top: 2px"></span>  Cerrar sesión</a></li>
         </ul>
     </nav>
@@ -52,9 +53,15 @@
                 <h1>Convenios</h1>
 
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="form-group">
                     <input type="text" class="form-control" id="buscar" placeholder="Buscar">
+                    <br>
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="form-group">
+                    <input type="image" id="search" onclick="search()" src="images/search.png" name="image">
                     <br>
                 </div>
             </div>
@@ -109,6 +116,41 @@
 </div>
 </body>
 <script type="application/javascript">
+    function search(){
+        console.log($("#buscar").val());
+        var parametros = {
+            convenio : $("#buscar").val()
+        };
+        $.ajax({
+            data:  parametros,
+            url:   'searchConvenios.php',
+            type:  'post',
+            beforeSend: function () {
+            },
+            success:  function (response){
+                $("#tbody").empty();
+                var data = response.split('|');
+                var i = 0;
+                $.each(data, function (index, element) {
+                    var res = element.split(',');
+                    if(i<res.length-1)
+                    {
+                        var nuevafila= "<tr><td>" +
+                            res[0] + "</td><td>" +
+                            res[1] + "</td><td>" +
+                            res[2] + "</td><td>" +
+                            res[3] + "</td><td>" +
+                            res[4] + '<form method="get" action="DocConvenios/Convenio3.docx">'+
+                            "                        <button type=\"submit\" class=\"btn btn-info\"><span class=\"glyphicon glyphicon-download-alt\"></span></button>\n" +
+                            "                    </form></td><td>";
+                        $("#tabla").append(nuevafila);
+                        i++;
+                    }
+
+                });
+            }
+        })
+    }
     $("document").ready(function(){
         $("#docConvenio").change(function() {
             $("#div1").hide();

@@ -18,7 +18,8 @@
 </head>
 <body>
     <div class="nav" style="" align="right">
-        <label>USERNAME</label>
+        <label><?php     session_start();
+            echo $_SESSION['user'] ?></label>
         <img class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
     </div>
     <div class="wrapper">
@@ -37,7 +38,7 @@
                 </li>
                 <li  class="active"><a href="titulos.php">Títulos</a></li>
                 <li><a href="convenios.php">Convenios</a></li>
-                <li><a href="miCuenta.html">Tu cuenta</a></li>
+                <li><a href="miCuenta.php">Tu cuenta</a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-off" style="top: 2px"></span>  Cerrar sesión</a></li>
             </ul>
         </nav>

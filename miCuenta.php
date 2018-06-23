@@ -6,6 +6,7 @@
     <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="js/main.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <link rel="stylesheet" type="text/css" href="css/miCuenta.css">
@@ -13,7 +14,7 @@
 </head>
 <body>
 <div class="nav" style="" align="right">
-    <label>USERNAME</label>
+    <label><?php  session_start(); echo $_SESSION['user'] ?></label>
     <img class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
 </div>
 <div class="wrapper">
@@ -32,7 +33,7 @@
             </li>
             <li><a href="titulos.php">Títulos</a></li>
             <li ><a href="convenios.php">Convenios</a></li>
-            <li class="active"><a href="miCuenta.html">Tu cuenta</a></li>
+            <li class="active"><a href="miCuenta.php">Tu cuenta</a></li>
             <li><a href="registroNotas.php"><span class="glyphicon glyphicon-off" style="top: 2px"></span>  Cerrar sesión</a></li>
         </ul>
     </nav>
@@ -45,10 +46,10 @@
          <div class="well profile">
             <div class="col-sm-12">
                 <div class="col-xs-12 col-sm-8">
-                    <h2>USERNAME</h2>
-                    <p><strong>Nombres: </strong> USERNAME. </p>
-                    <p><strong>Apellidos: </strong> USERLASTNAME </p>
-                    <p><strong>Correo electrónico: </strong> USERMAIL</p>
+                    <h2><?php echo $_SESSION['user'] ?></h2>
+                    <p><strong>Nombres: </strong> <?php echo $_SESSION['nombres'] ?> </p>
+                    <p><strong>Apellidos: </strong> <?php echo $_SESSION['apellidos'] ?> </p>
+                    <p><strong>Correo electrónico: </strong> <?php echo $_SESSION['email'] ?></p>
                 </div>
                 <div class="col-xs-12 col-sm-4 text-center">
                     <figure>
@@ -67,7 +68,7 @@
                                 <span class="fa fa-star"></span>
                             </a>
                             <a href="#">
-                                 <span class="fa fa-star-o"></span>
+                                 <span class="fa fa-star"></span>
                             </a>
                             </p>
                         </figcaption>

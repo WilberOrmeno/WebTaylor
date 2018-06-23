@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link href="util/jGrowl/jquery.jgrowl.css" rel="stylesheet" media="screen">
+    <script src="util/jGrowl/jquery.jgrowl.js"></script>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="js/index.js"></script>
     <link rel="stylesheet" type="text/css" href="css/index.css">
 </head>
@@ -18,10 +20,10 @@
                 <span style="font-size: 16px; color: darkgray">¡Bienvenida de nuevo!</span>
                 <br>
                 <br>
-                <form class="form-signin" action="fichaMatricula.php">
+                <form id="login_form" class="form-signin" method="post">
                     <span id="reauth-email" class="reauth-email"></span>
-                    <input type="text" id="inputEmail" class="form-control" placeholder="Usuario" required autofocus>
-                    <input type="password" id="inputPassword" class="form-control" placeholder="Contraseña" required>
+                    <input type="text" id="inputEmail" name="username" class="form-control" placeholder="Usuario" required autofocus>
+                    <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Contraseña" required>
                     <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
                 </form>
 
@@ -32,4 +34,30 @@
         </div>
     </div>
 </body>
+<script>
+    $(document).ready(function(){
+        $("#login_form").submit(function(e){
+            e.preventDefault();
+            var formData = jQuery(this).serialize();
+            $.ajax({
+                type: "POST",
+                url: "login.php",
+
+                data: formData,
+                success: function(html){
+                    if (html == 'true'){
+                        $.jGrowl("Cargando, espere por favor...", { sticky: true });
+                        $.jGrowl("Bienvenido al sistema de matrícula", { header: 'Acceso concedido' });
+                        var delay = 1000;
+                        setTimeout(function(){ window.location = 'miCuenta.php'  }, delay);
+                    }else
+                    {
+                        $.jGrowl("Por favor verifica tu nombre de usuario y contraseña", { header: 'Error al iniciar sesión' });
+                    }
+                }
+            });
+            return false;
+        });
+    });
+</script>
 </html>

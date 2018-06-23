@@ -1,5 +1,5 @@
 <?php  include("dbcon.php") ?>
-<table class="table table-striped">
+<table class="table table-striped" id="tabla">
     <thead>
     <tr>
         <th scope="col">#</th>
@@ -9,7 +9,7 @@
         <th scope="col">Descargar</th>
     </tr>
     </thead>
-    <tbody>
+    <tbody id="tbody">
     <?php
     $query = mysqli_query(conectar(),"select * from convenios ")or die(mysqli_error(conectar()));
     while($row = mysqli_fetch_array($query)) {

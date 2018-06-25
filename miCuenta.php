@@ -77,17 +77,18 @@
                     </figure>
                 </div>
             </div>
+             <?php include "editarCuenta.php"?>
             <div class="col-xs-12 divider text-center">
                 <div class="col-xs-12 col-sm-4 emphasis">
 
-                    <button class="btn btn-success btn-block"><span class="fa fa-plus-circle"></span> Eliminar </button>
+                    <button class="btn btn-success btn-block" data-toggle="modal" data-target="#modalEliminar"><span class="fa fa-plus-circle"></span> Eliminar </button>
                 </div>
                 <div class="col-xs-12 col-sm-4 emphasis">
 
-                    <button class="btn btn-info btn-block"><span class="fa fa-user"></span> Editar </button>
+                    <button class="btn btn-info btn-block" data-toggle="modal" data-target="#modalEditar"><span class="fa fa-user"></span> Editar </button>
                 </div>
                 <div class="col-xs-12 col-sm-4 emphasis">
-                   <button type="button" class="btn btn-primary"><span class="fa fa-gear"></span> Administrar </button>
+                    <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#modalAdministrar"><span class="fa fa-gear"></span> Administrar </button>
                 </div>
             </div>
          </div>

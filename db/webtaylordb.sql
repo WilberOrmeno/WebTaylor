@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-06-2018 a las 22:38:20
+-- Tiempo de generación: 27-06-2018 a las 20:08:52
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.3
 
@@ -91,7 +91,8 @@ CREATE TABLE `convenios` (
 INSERT INTO `convenios` (`id`, `convenio`, `entidad`, `vencimiento`, `rutaConvenio`) VALUES
 (1, 'Convenio1.docx', 'Hospital Test1', '11/12/18', 'DocConvenios/Convenio1.docx'),
 (2, 'Convenio2.docx', 'Universidad Test1', '08/01/17', 'DocConvenios/Convenio2.docx'),
-(3, 'Convenio3.docx', 'Hospital Test2', '19/02/18', 'DocConvenios/Convenio3.docx');
+(3, 'Convenio3.docx', 'Hospital Test2', '19/02/18', 'DocConvenios/Convenio3.docx'),
+(4, '', 'we', 'we', 'DocConvenios/');
 
 -- --------------------------------------------------------
 
@@ -214,8 +215,31 @@ CREATE TABLE `titulos` (
 
 INSERT INTO `titulos` (`id_titulo`, `nombres`, `dni`, `carrera`, `telefono`, `celular`, `sede`, `inicio/termino`, `observaciones`, `seguimiento`) VALUES
 (1, 'Javier OrmeÃ±o Vera', '72416642', 'ComputaciÃ³n', '994318344', '994318344', 'Lima', '---', '----', 1),
-(2, 'Marcela Andrade Salinas', '72416642', 'EnfemerÃ¡a	', '994318344', '994318344', 'Lima', '----', '----', 0),
-(3, 'Elvis Velasque Espinoza', '98745632', 'ComputaciÃ³n', '987654312', '987654312', 'Lima', '----', '----', 0);
+(2, 'Marcela Andrade Salinas', '72416642', 'EnfemerÃ¡a	', '994318344', '994318344', 'Lima', '----', '----', 1),
+(3, 'Elvis Velasque Espinoza', '98745632', 'ComputaciÃ³n', '987654312', '987654312', 'Lima', '----', '----', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `users`
+--
+
+CREATE TABLE `users` (
+  `id_user` int(11) NOT NULL,
+  `username` varchar(30) NOT NULL,
+  `password` varchar(30) NOT NULL,
+  `nombres` varchar(30) NOT NULL,
+  `apellidos` varchar(30) NOT NULL,
+  `nivel` varchar(30) NOT NULL,
+  `email` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `users`
+--
+
+INSERT INTO `users` (`id_user`, `username`, `password`, `nombres`, `apellidos`, `nivel`, `email`) VALUES
+(10, 'admin', 'admin123', 'asd', 'asd', 'asdasd', 'asdasd');
 
 --
 -- Índices para tablas volcadas
@@ -270,6 +294,12 @@ ALTER TABLE `titulos`
   ADD PRIMARY KEY (`id_titulo`);
 
 --
+-- Indices de la tabla `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id_user`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -289,7 +319,7 @@ ALTER TABLE `alumnos`
 -- AUTO_INCREMENT de la tabla `convenios`
 --
 ALTER TABLE `convenios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `datosacademicos`
@@ -313,13 +343,19 @@ ALTER TABLE `notasdetalle`
 -- AUTO_INCREMENT de la tabla `recibos`
 --
 ALTER TABLE `recibos`
-  MODIFY `id_alumno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_alumno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `titulos`
 --
 ALTER TABLE `titulos`
   MODIFY `id_titulo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `users`
+--
+ALTER TABLE `users`
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

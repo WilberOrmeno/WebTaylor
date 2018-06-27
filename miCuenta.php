@@ -11,10 +11,13 @@
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
     <link rel="stylesheet" type="text/css" href="css/miCuenta.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link href="util/jGrowl/jquery.jgrowl.css" rel="stylesheet" media="screen">
+    <script src="util/jGrowl/jquery.jgrowl.js"></script>
 </head>
 <body>
-<div class="nav" style="" align="right">
-    <label><?php  session_start(); echo $_SESSION['user'] ?></label>
+<div class="nav" align="right">
+    <b><?php session_start();
+        echo $_SESSION['user'] ?></b>
     <img class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
 </div>
 <div class="wrapper">
@@ -34,7 +37,7 @@
             <li><a href="titulos.php">Títulos</a></li>
             <li ><a href="convenios.php">Convenios</a></li>
             <li class="active"><a href="miCuenta.php">Tu cuenta</a></li>
-            <li><a href="registroNotas.php"><span class="glyphicon glyphicon-off" style="top: 2px"></span>  Cerrar sesión</a></li>
+            <li><a href="index.html"><span class="glyphicon glyphicon-off" style="top: 2px"></span>  Cerrar sesión</a></li>
         </ul>
     </nav>
     <div id="content" style="margin-top: 180px; width: 100%">
@@ -79,17 +82,14 @@
             </div>
              <?php include "editarCuenta.php"?>
             <div class="col-xs-12 divider text-center">
-                <div class="col-xs-12 col-sm-4 emphasis">
+                <div class="col-xs-12 col-sm-6 emphasis">
 
                     <button class="btn btn-success btn-block" data-toggle="modal" data-target="#modalEliminar"><span class="fa fa-plus-circle"></span> Eliminar </button>
                 </div>
-                <div class="col-xs-12 col-sm-4 emphasis">
-
+                <div class="col-xs-12 col-sm-6 emphasis">
                     <button class="btn btn-info btn-block" data-toggle="modal" data-target="#modalEditar"><span class="fa fa-user"></span> Editar </button>
                 </div>
-                <div class="col-xs-12 col-sm-4 emphasis">
-                    <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#modalAdministrar"><span class="fa fa-gear"></span> Administrar </button>
-                </div>
+
             </div>
          </div>
         </div>
@@ -98,5 +98,6 @@
     </div>
 
 </div>
+
 </body>
 </html>

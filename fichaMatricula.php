@@ -68,7 +68,7 @@
             <li  ><a href="titulos.php">Títulos</a></li>
             <li><a href="convenios.php">Convenios</a></li>
             <li><a href="miCuenta.php">Tu cuenta</a></li>
-            <li><a href="#"><span class="glyphicon glyphicon-off" style="top: 2px"></span>  Cerrar sesión</a></li>
+            <li><a href="index.html"><span class="glyphicon glyphicon-off" style="top: 2px"></span>  Cerrar sesión</a></li>
         </ul>
     </nav>
     <div id="content" style="margin-top: 20px; width: 100%">
@@ -92,7 +92,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="especialidad">Especialidad</label>
-                        <input type="text" class="form-control" id="especialidad" name="especialidad" placeholder="Especialidad ">
+                        <input type="text" class="form-control" id="especialidad" name="especialidad" placeholder="Especialidad" autofocus>
                     </div>
                 </div>
                 <div class="col-md-3">

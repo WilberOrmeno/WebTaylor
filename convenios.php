@@ -18,7 +18,7 @@
 
 <body>
 <div class="nav" style="" align="right">
-    <label><?php     session_start();
+    <label><?php session_start();
         echo $_SESSION['user'] ?></label>
     <img class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
 </div>
@@ -39,7 +39,7 @@
             <li><a href="titulos.php">Títulos</a></li>
             <li  class="active"><a href="convenios.php">Convenios</a></li>
             <li><a href="miCuenta.php">Tu cuenta</a></li>
-            <li><a href="#"><span class="glyphicon glyphicon-off" style="top: 2px"></span>  Cerrar sesión</a></li>
+            <li><a href="index.html"><span class="glyphicon glyphicon-off" style="top: 2px"></span>  Cerrar sesión</a></li>
         </ul>
     </nav>
     <div id="content" style="margin-top: 20px; width: 100%">
@@ -69,7 +69,7 @@
             <div class="col-md-5" style="top:15px">
                 <div class="form-group">
                     <label for="nombreEntidad">Nombre de la entidad</label>
-                    <input type="text" class="form-control" name="entidad" id="nombreEntidad" placeholder="Entidad">
+                    <input type="text" class="form-control" name="entidad" id="nombreEntidad" placeholder="Entidad" autofocus>
                 </div>
                 <div class="form-group">
                     <label for="vencimiento">Vencimiento</label>

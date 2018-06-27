@@ -18,7 +18,7 @@
 </head>
 <body>
     <div class="nav" style="" align="right">
-        <label><?php     session_start();
+        <label><?php session_start();
             echo $_SESSION['user'] ?></label>
         <img class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
     </div>
@@ -39,7 +39,7 @@
                 <li  class="active"><a href="titulos.php">Títulos</a></li>
                 <li><a href="convenios.php">Convenios</a></li>
                 <li><a href="miCuenta.php">Tu cuenta</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-off" style="top: 2px"></span>  Cerrar sesión</a></li>
+                <li><a href="index.html"><span class="glyphicon glyphicon-off" style="top: 2px"></span>  Cerrar sesión</a></li>
             </ul>
         </nav>
         <div id="content" style="margin-top: 10px; width: 100%">
@@ -55,7 +55,7 @@
                 <div class="col-md-6" style="top:15px">
                     <div class="form-group">
                         <label for="nombreCompleto">Nombre completo</label>
-                        <input type="text" class="form-control" id="nombreCompleto" placeholder="Apellidos y nombres">
+                        <input type="text" class="form-control" id="nombreCompleto" placeholder="Apellidos y nombres" autofocus>
                     </div>
                 </div>
                 <div class="col-md-6" style="top:15px">
@@ -140,9 +140,81 @@
                                     else{
                                         echo "<label style=\"color: #63de83;\"> Recibido</label> ";
                                     }
-                                    echo "<a href=\"#\"><span class=\"glyphicon glyphicon-edit\"></span></a> ".
-                                         "<a href=\"#\"><span class=\"glyphicon glyphicon-floppy-disk\"></span></a>"
+                                    echo "<button name='edit' id=".$row['id_titulo']." class=\"btn\" data-toggle=\"modal\" data-target=\"#MyModal\" onclick='editTitle(this.id)' ><span class=\"glyphicon glyphicon-edit\"></span></button>".
+                                    "  <button id=".$row['id_titulo']." class=\"btn\" onclick='editTitleState(this.id)'><span class=\"glyphicon glyphicon-floppy-disk\"></span></button>";
                                 ?></td>
+                                <div id="MyModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title">EDITAR INFORMACIÓN DE TÍTULO</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="body-message" id="imprimirEsto">
+                                                    <div class="col-md-6" style="top:15px">
+                                                        <div class="form-group">
+                                                            <label for="nombreCompleto">Nombre completo</label>
+                                                            <input type="text" class="form-control" id="nombreCompletoE" placeholder="Apellidos y nombres" autofocus>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6" style="top:15px">
+                                                        <div class="form-group">
+                                                            <label for="dni">Documento de identidad</label>
+                                                            <input type="text" class="form-control" id="dniE" placeholder="DNI">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4" style="top:15px">
+                                                        <div class="form-group">
+                                                            <label for="carrera">Carrera</label>
+                                                            <input type="text" class="form-control" id="carreraE" placeholder="Carrera">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4" style="top:15px">
+                                                        <div class="form-group">
+                                                            <label for="dni">Teléfono</label>
+                                                            <input type="text" class="form-control" id="telefonoE" placeholder="Teléfono">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4" style="top:15px">
+                                                        <div class="form-group">
+                                                            <label for="celular">Celular</label>
+                                                            <input type="text" class="form-control" id="celularE" placeholder="Celular">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2" style="top:15px">
+                                                        <div class="form-group">
+                                                            <label for="sede">Sede</label>
+                                                            <input type="text" class="form-control" id="sedeE" placeholder="Sede">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-5" style="top:15px">
+                                                        <div class="form-group">
+                                                            <label for="iniciotermino">Inicio/término</label>
+                                                            <input type="text" class="form-control" id="inicioterminoE" placeholder="Inicio/término">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-5" style="top:15px">
+                                                        <div class="form-group">
+                                                            <label for="obs">Observaciones</label>
+                                                            <input type="text" class="form-control" id="obsE" placeholder="Observaciones">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="divider"></div>
+                                                <br><br><br><br><br><br><br><br><br><br><br><br>
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <center>
+                                                    <button class="btn btn-warning" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+                                                    <button id="btnDelete" type="button" class="btn btn-success" data-dismiss="modal" onclick="saveTitleEdited()">Guardar</button>
+                                                </center>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
                             </tr>
                             <?php } ?>
                         </tbody>
@@ -174,6 +246,74 @@
             success:  function (response) {
                 $.jGrowl("Registro guardado con éxito", { header: 'Guardado' });
                 setTimeout(location.reload.bind(location), 2000);
+            }
+        });
+    }
+
+    var parametros = {};
+    var id = 0;
+    function editTitle(value) {
+        id = value;
+        this.sId = (this.id) ; // button ID
+        parametros = {
+            "id" : value
+        };
+        $.ajax({
+            data:  parametros,
+            url:   'getTitulo.php',
+            type:  'post',
+            beforeSend: function () {
+                $("#resultado").html("Procesando, espere por favor...");
+            },
+            success:  function (response) {
+                var res = response.split(".");
+                console.log(res[1]);
+                $("#nombreCompletoE").val(res[1]);
+                $("#dniE").val(res[2]);
+                $("#carreraE").val(res[3]);
+                $("#telefonoE").val(res[4]);
+                $("#celularE").val(res[5]);
+                $("#sedeE").val(res[6]);
+                $("#inicioterminoE").val(res[7]);
+                $("#obsE").val(res[8]);
+            }
+        });
+    }
+    function saveTitleEdited(){
+        parametros = {
+            "id": id,
+            "nombreCompletoE" : $("#nombreCompletoE").val(),
+            "dniE" : $("#dniE").val(),
+            "carreraE" : $("#carreraE").val(),
+            "telefonoE" : $("#telefonoE").val(),
+            "celularE" : $("#celularE").val(),
+            "sedeE" : $("#sedeE").val(),
+            "inicioterminoE" : $("#inicioterminoE").val(),
+            "obsE" : $("#obsE").val()
+        };
+
+        $.ajax({
+            data:  parametros,
+            url:   'editTitle.php',
+            type:  'post',
+            success:  function (response) {
+                $.jGrowl("Registro actualizado con éxito", { header: 'Actualizado' });
+                setTimeout(location.reload.bind(location), 2000);
+            }
+        });
+    }
+    function editTitleState(value) {
+        parametros = {
+            "id": value
+        };
+        $.ajax({
+            data:  parametros,
+            url:   'editTitleState.php',
+            type:  'post',
+            success:  function (response) {
+                console.log(response);
+                $.jGrowl("El estado del título ha sido cambiado", { header: 'Confimación' });
+                setTimeout(location.reload.bind(location), 1500);
             }
         });
     }

@@ -15,42 +15,46 @@
                 ?>
                 <div class="form-group">
                     <label for="username">Usuario:</label>
-                    <input type="text" id="username" name="usename" class="form-control"
-                           value="<?php echo $extraido['username']?>" style="width: 130px">
+                    <input type="text" id="username" name="username" class="form-control"
+                           value="<?php echo $extraido['username']?>" style="width: 250px" autofocus>
                 </div>
                 <div class="form-group">
                     <label for="password">Contraseña:</label>
                     <input type="password" id="password" name="password" class="form-control"
-                           value="<?php echo $extraido['password']?>" style="width: 130px">
+                           value="<?php echo $extraido['password']?>" style="width: 250px">
                 </div>
                 <div class="form-group">
                     <label for="nombres">Nombres: </label>
                     <input type="text" id="nombres" name="nombres" class="form-control"
-                           value="<?php echo $extraido['nombres']?>" style="width: 130px">
+                           value="<?php echo $extraido['nombres']?>" style="width: 250px">
                 </div>
                 <div class="form-group">
                     <label for="apellidos">Apellidos:</label>
                     <input type="text" id="apellidos" name="password" class="form-control"
-                           value="<?php echo $extraido['apellidos']?>" style="width: 130px">
+                           value="<?php echo $extraido['apellidos']?>" style="width: 250px">
                 </div>
                 <div class="form-group">
                     <label for="email">Email:</label>
                     <input type="email" id="email" name="email" class="form-control"
-                           value="<?php echo $extraido['email']?>" style="width: 130px">
+                           value="<?php echo $extraido['email']?>" style="width: 250px">
                 </div>
                 <style>
+                    input {
+                        margin-left: 210px;
+                    }
                     label {
                         text-align: right;
                         clear: both;
                         float:left;
                         margin-top: 10px;
                         margin-right:15px;
+                        margin-left: 90px;
                     }
                 </style>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Cancelar</button>
-                <button type="button" class="btn btn-success" data-dismiss="modal">Guardar</button>
+                <button type="button" class="btn btn-success" onclick="updateAccount()" data-dismiss="modal">Guardar</button>
             </div>
         </div>
     </div>
@@ -86,7 +90,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">NO</button>
-                <button type="button" class="btn btn-success" data-dismiss="modal">SI</button>
+                <button type="button" class="btn btn-success" onclick="deleteAccount()" data-dismiss="modal">SI</button>
             </div>
         </div>
     </div>
@@ -111,5 +115,48 @@
 </div>
 
 <script type="application/javascript">
+    function deleteAccount() {
+        console.log("deleting");
+
+        var data = {
+            test: $( "#test" ).val()
+        };
+        var options = {
+            url: "deleteAccount.php",
+            dataType: "text",
+            type: "POST",
+            data: data,
+            success: function( data, status, xhr ) {
+                $.jGrowl("Usuario eliminado con éxito.", { header: 'Eliminado' });
+                $.jGrowl("Tu sesión se cerrará.", { header: 'Aviso' });
+                setTimeout(function(){ window.location = 'index.html'}, 5000);
+            },
+            error: function( xhr, status, error ) {
+                $.jGrowl("Ocurrió un error al eliminar", { header: 'Error' });
+            }
+        };
+        $.ajax( options );
+
+    }
+
+    function updateAccount() {
+        var parametros = {
+            "username" : $( "#username" ).val(),
+            "password" : $( "#password" ).val(),
+            "nombres" : $( "#nombres" ).val(),
+            "apellidos" : $( "#apellidos" ).val(),
+            "email" : $( "#email" ).val()
+        };
+        $.ajax({
+            data:  parametros,
+            url:   'editAccount.php',
+            type:  'post',
+            success:  function (response) {
+                $.jGrowl("Datos actualizados con éxito", { header: 'Actualizado' });
+                $.jGrowl("Tu sesión se cerrará, vuelve a ingresar tus credenciales", { header: 'Aviso' });
+                setTimeout(function(){ window.location = 'index.html'}, 5000);
+            }
+        });
+    }
 
 </script>

@@ -275,13 +275,15 @@
                 </div>
                 <div class="col-md-12" style="top:15px; padding-bottom: 50px;" align="right">
                     <button type="button" class="btn" style="background-color: #47525e; color: #FFFFFF; width: 180px">Cancelar</button>
-                    <button type="submit" class="btn" style="background-color: #47525e; color: #FFFFFF; width: 180px">Agregar</button>
+                    <button type="submit" class="btn" style="background-color: #47525e; color: #FFFFFF; width: 180px" data-toggle="modal" data-target="#myModal">Agregar</button>
                 </div>
             </form>
     </div>
     </div>
 
 </div>
+<script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
+
 <script>
     var imageLoader = document.getElementById('filePhoto');
     imageLoader.addEventListener('change', handleImage, false);
@@ -310,10 +312,54 @@
             })
             .done(function(res){
                 $.jGrowl("Registro agregado con éxito", { header: 'Agregado' });
-                setTimeout(location.reload.bind(location), 1500);
+                //setTimeout(location.reload.bind(location), 1500);
             });
         });
     });
+    function print(){
+      var parametros = {
+            "id" : "1"
+        };
+        $.ajax({
+            data:  parametros,
+            url:   'getLastStudent.php',
+            type:  'post',
+            beforeSend: function () {
+                $("#resultado").html("Procesando, espere por favor...");
+            },
+            success:  function (response) {
+                console.log(response)
+                $("#resultado").html(response);
+                var doc = new jsPDF();
+                var specialElementHandlers = {
+                    '#editor': function (element, renderer) {
+                        return true;
+                    }
+                };
+                doc.fromHTML($('#resultado').html(), 15, 15, {
+                    'width': 500,
+                    'elementHandlers': specialElementHandlers
+                });
+                doc.save('sample-file.pdf');
+            }
+        });
+    }
 </script>
+<span id="resultado"></span>
+
 </body>
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">¿Deseas imprimir este registro?</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">NO</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" onclick="print()">SI</button>
+            </div>
+        </div>
+    </div>
+</div>
 </html>

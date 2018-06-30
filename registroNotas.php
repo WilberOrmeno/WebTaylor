@@ -191,7 +191,7 @@
                     <center>
                         <button type="button" class="btn btn-lg" style="background-color: #47525e; color: #FFFFFF; width: 180px">Cancelar</button>
                         <button type="button" class="btn btn-lg" style="background-color: #47525e; color: #FFFFFF; width: 180px" onclick="previous()">Anterior</button>
-                        <input type="submit" class="btn btn-lg" style="background-color: #47525e; color: #FFFFFF; width: 180px" value="Guardar"/>
+                        <input type="submit" class="btn btn-lg" style="background-color: #47525e; color: #FFFFFF; width: 180px" value="Guardar" data-toggle="modal" data-target="#myModal"/>
                     </center>
                 </div>
             </div>
@@ -383,11 +383,30 @@
             })
             .done(function(res){
                 $.jGrowl("Registro agregado con éxito", { header: 'Agregado' });
-                setTimeout(location.reload.bind(location), 1500);
+                //setTimeout(location.reload.bind(location), 1500);
             });
         });
     });
-
+    function print() {
+        console.log("asdasd");
+    }
 </script>
 </body>
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">¿Deseas imprimir este registro?</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">NO</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" onclick="print()">SI</button>
+            </div>
+        </div>
+
+    </div>
+</div>
 </html>

@@ -11,9 +11,6 @@
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <link href="util/jGrowl/jquery.jgrowl.css" rel="stylesheet" media="screen">
     <script src="util/jGrowl/jquery.jgrowl.js"></script>
-    <style>
-
-    </style>
     <?php include "dbcon.php"?>
 </head>
 <body>
@@ -49,8 +46,11 @@
             </button>-->
             <br><br><br>
             <div class="row-fluid" style="padding: 20px; width: 100%">
-                <div class="col-md-12">
+                <div class="col-md-8">
                     <h1>Títulos</h1>
+                </div>
+                <div class="col-md-4" style="top:30px">
+                    <button type="button" class="btn btn-danger" onclick="printDiv()">Imprimir</button>
                 </div>
                 <div class="col-md-6" style="top:15px">
                     <div class="form-group">
@@ -101,6 +101,18 @@
                     </div>
                 </div>
                 <div class="col-md-12" style="top:15px" align="right">
+                    <div class="col-md-3" align="right">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="buscar" placeholder="Buscar">
+                            <br>
+                        </div>
+                    </div>
+                    <div class="col-md-1" align="left">
+                        <div class="form-group">
+                            <input type="image" id="search" onclick="search()" src="images/search.png" name="image">
+                            <br>
+                        </div>
+                    </div>
                     <button type="button" class="btn" style="background-color: #47525e; color: #FFFFFF; width: 180px">Cancelar</button>
                     <input type="button" href="javascript:;" class="btn" style="background-color: #47525e; color: #FFFFFF; width: 180px"
                     onclick="SaveTitulo($('#nombreCompleto').val(),$('#dni').val(),$('#carrera').val(),
@@ -109,7 +121,7 @@
 
                 </div>
                 <div class="col-md-12" style="top: 40px;">
-                    <table class="table table-striped">
+                    <table class="table table-striped" id="tabla">
                         <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -121,7 +133,7 @@
                             <th scope="col">Seguimiento</th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="tbody">
                             <?php
                                 $query = mysqli_query(conectar(),"select * from titulos")or die(mysqli_error(conectar()));
                                 while($row = mysqli_fetch_array($query)) {
@@ -133,16 +145,31 @@
                                 <td><?php echo $row['telefono']; ?></td>
                                 <td><?php echo $row['celular']; ?></td>
                                 <td><?php echo $row['carrera']; ?></td>
-                                <td><?php
-                                    if ($row['seguimiento'] == 0 || $row['seguimiento'] == null) {
-                                        echo "<label style=\"color: #ebbd30;\">En espera</label> ";
-                                    }
-                                    else{
-                                        echo "<label style=\"color: #63de83;\"> Recibido</label> ";
-                                    }
+                                <td>
+                                    <div class="col-md-7" align="right">
+                                    <select class="form-control" id="seguimiento<?php echo $row['id_titulo']?>" onchange="cambioColor(this.value, this.id)" style="width: 200px; font-weight: bold;">
+                                        <?php if($row['seguimiento'] == 1){
+                                            echo "<option value=\"1\" style=\"color: #63de83; font-weight: bold\" selected>Recibido</option>";
+                                            echo "<option value=\"0\" style=\"color: #ebbd30; font-weight: bold\">En espera</option>";
+                                            echo "<option value=\"2\" style=\"color: red; font-weight: bold\">Con observaciones</option>";
+                                        }else if($row['seguimiento'] == 0){
+                                            echo "<option value=\"1\" style=\"color: #63de83; font-weight: bold\" >Recibido</option>";
+                                            echo "<option value=\"0\" style=\"color: #ebbd30; font-weight: bold\" selected>En espera</option>";
+                                            echo "<option value=\"2\" style=\"color: red; font-weight: bold\">Con observaciones</option>";
+                                        } else{
+                                            echo "<option value=\"1\" style=\"color: #63de83; font-weight: bold\" >Recibido</option>";
+                                            echo "<option value=\"0\" style=\"color: #ebbd30; font-weight: bold\" >En espera</option>";
+                                            echo "<option value=\"2\" style=\"color: red; font-weight: bold\" selected>Con observaciones</option>";
+                                        } ?>
+                                    </select>
+                                    </div>
+                                    <div class="col-md-5" align="left">
+                                    <?php
                                     echo "<button name='edit' id=".$row['id_titulo']." class=\"btn\" data-toggle=\"modal\" data-target=\"#MyModal\" onclick='editTitle(this.id)' ><span class=\"glyphicon glyphicon-edit\"></span></button>".
                                     "  <button id=".$row['id_titulo']." class=\"btn\" onclick='editTitleState(this.id)'><span class=\"glyphicon glyphicon-floppy-disk\"></span></button>";
-                                ?></td>
+                                    ?>
+                                    </div>
+                                </td>
                                 <div id="MyModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
@@ -224,7 +251,107 @@
         </div>
     </div>
 </body>
+<div id="editor"></div>
+<script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
 <script type="application/javascript">
+    function printDiv() {
+        var doc = new jsPDF();
+        var specialElementHandlers = {
+            '#editor': function (element, renderer) {
+                return true;
+            }
+        };
+        doc.fromHTML($('#tabla').html(), 15, 15, {
+            'width': 170,
+            'elementHandlers': specialElementHandlers
+        });
+        doc.save('sample-file.pdf');
+
+    }
+    function search(){
+        console.log($("#buscar").val());
+        var parametros = {
+            nombres  : $("#buscar").val()
+        };
+        $.ajax({
+            data:  parametros,
+            url:   'searchTitulos.php',
+            type:  'post',
+            beforeSend: function () {
+            },
+            success:  function (response){
+                $("#tbody").empty();
+                var data = response.split('|');
+                var i = 0;
+                $.each(data, function (index, element) {
+                    var res = element.split(',');
+                    if(i<res.length-1)
+                    {
+                        var options = "";
+                        if(res[6] == 1){
+                           options = "<option value=\"1\" style=\"color: #63de83; font-weight: bold\" selected>Recibido</option>" +
+                            "<option value=\"0\" style=\"color: #ebbd30; font-weight: bold\">En espera</option>" +
+                            "<option value=\"2\" style=\"color: red; font-weight: bold\">Con observaciones</option>";
+                        }else if(res[6] == 0){
+                            options = "<option value=\"1\" style=\"color: #63de83; font-weight: bold\" >Recibido</option>" +
+                            "<option value=\"0\" style=\"color: #ebbd30; font-weight: bold\" selected>En espera</option>" +
+                            "<option value=\"2\" style=\"color: red; font-weight: bold\">Con observaciones</option>";
+                        } else{
+                            options =  "<option value=\"1\" style=\"color: #63de83; font-weight: bold\" >Recibido</option>" +
+                            "<option value=\"0\" style=\"color: #ebbd30; font-weight: bold\" >En espera</option>" +
+                            "<option value=\"2\" style=\"color: red; font-weight: bold\" selected>Con observaciones</option>";
+                        }
+                        var nuevafila= "<tr><td>" +
+                            res[0] + "</td><td>" +
+                            res[1] + "</td><td>" +
+                            res[2] + "</td><td>" +
+                            res[3] + "</td><td>" +
+                            res[4] + "</td><td>" +
+                            res[5] + "</td><td>" +
+                            "<div class=\"col-md-7\" align=\"right\">" +
+                            "<select class=\"form-control\" id=\"seguimiento\" onchange=\"cambioColor(this.value, this.id)\" style=\"width: 200px; font-weight: bold;\">\n" +
+                            options +
+                            "</select></div><div class=\"col-md-5\" align=\"left\">"+
+
+                            "<button name='edit' id='' class='btn' data-toggle=\"modal\" data-target=\"#MyModal\" onclick='editTitle(this.id)' disabled><span class=\"glyphicon glyphicon-edit\" ></span></button>" +
+                            "<button id='' class='btn' onclick='editTitleState(this.id)' disabled><span class=\"glyphicon glyphicon-floppy-disk\" ></span></button>" +
+                            "</div></td><tr>";
+
+                        $("#tabla").append(nuevafila);
+                        if(res[6] == 0){
+                            $("#seguimiento").css("color", "#ebbd30");
+                        }else if (res[6] == 1){
+                            $("#seguimiento").css("color", "#63de83");
+                        }else{
+                            $("#seguimiento").css("color", "red");
+                        }
+                        i++;
+                    }
+
+                });
+            }
+        })
+    }
+    var i = 0;
+    for(i = 1; i< 100; i++){
+        var value = $("#seguimiento"+i).val();
+        if(value == 0){
+            $("#seguimiento"+i).css("color", "#ebbd30");
+        }else if (value == 1){
+            $("#seguimiento"+i).css("color", "#63de83");
+        }else{
+            $("#seguimiento"+i).css("color", "red");
+        }
+    }
+    function cambioColor(value, id){
+        if(value == 0){
+            $("#"+id).css("color", "#ebbd30");
+        }else if (value == 1){
+            $("#"+id).css("color", "#63de83");
+        }else{
+            $("#"+id).css("color", "red");
+        }
+    }
     function SaveTitulo(v1, v2, v3, v4, v5, v6, v7, v8){
         var parametros = {
             "nombres" : v1,
@@ -249,7 +376,6 @@
             }
         });
     }
-
     var parametros = {};
     var id = 0;
     function editTitle(value) {
@@ -303,8 +429,10 @@
         });
     }
     function editTitleState(value) {
+        id = value;
         parametros = {
-            "id": value
+            "id": value,
+            "state": $("#seguimiento"+value).val()
         };
         $.ajax({
             data:  parametros,

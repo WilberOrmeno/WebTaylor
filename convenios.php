@@ -13,9 +13,7 @@
     <script src="util/jGrowl/jquery.jgrowl.js"></script>
     <script src="dist/min/dropzone.min.js"></script>
     <link rel="stylesheet" href="dist/min/dropzone.min.css">
-
 </head>
-
 <body>
 <div class="nav" style="" align="right">
     <label><?php session_start();
@@ -53,13 +51,13 @@
                 <h1>Convenios</h1>
 
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3" align="right">
                 <div class="form-group">
                     <input type="text" class="form-control" id="buscar" placeholder="Buscar">
                     <br>
                 </div>
             </div>
-            <div class="col-md-1">
+            <div class="col-md-1" align="left">
                 <div class="form-group">
                     <input type="image" id="search" onclick="search()" src="images/search.png" name="image">
                     <br>
@@ -75,7 +73,9 @@
                     <label for="vencimiento">Vencimiento</label>
                     <input type="text" class="form-control" name="vencimiento" id="vencimiento" placeholder="dia/mes/año">
                 </div>
-
+                <div class="form-group" style="padding-top: 30px;">
+                    <button type="button" class="btn btn-danger" onclick="printDiv()" style="top: 50px">Imprimir</button>
+                </div>
             </div>
 
             <div class="col-md-7" style="left: 30px ;top:15px" align="right">

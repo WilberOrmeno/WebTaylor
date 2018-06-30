@@ -64,8 +64,10 @@
                     <label for="apPaterno">Apellido Paterno</label>
                     <input type="text" class="form-control" id="apPaterno" placeholder="Apellido Paterno">
                 </div>
+                <div class="form-group" style="padding-top: 30px;">
 
-
+                    <button type="button" class="btn btn-danger" onclick="printDiv()" style="top: 50px">Imprimir</button>
+                </div>
             </div>
             <div class="col-md-5" style="top:15px" >
                 <div style=" width: 500px; height: 180px; margin-bottom:10px;">
@@ -212,10 +214,8 @@
                data-toggle="modal" data-target="#myModal" value="Guardar">
             </div>
       <div class="modal-footer">
-        
       </div>
     </div>
-
   </div>
 </div>
 </div>
@@ -286,9 +286,7 @@
                 });
             }
         });
-
     }
-
 </script>
 </body>
 </html>

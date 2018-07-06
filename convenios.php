@@ -41,10 +41,6 @@
         </ul>
     </nav>
     <div id="content" style="margin-top: 20px; width: 100%">
-        <!--<button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
-            <i class="glyphicon glyphicon-align-left"></i>
-            Toggle Sidebar
-        </button>-->
         <br><br><br>
         <div class="row-fluid" style="padding: 40px; width: 100%">
             <div class="col-md-8">
@@ -107,7 +103,7 @@
             </div>
             </form>
             <div class="col-md-12" style="top: 40px;">
-                <?php include("convenios_table.php")?>
+                <?php include("conveniosTable.php") ?>
             </div>
         </div>
 
@@ -116,10 +112,26 @@
 </div>
 </body>
 <script type="application/javascript">
+    $(document).ready(function () {
+        $('#resgistrarTitulo').click(function (){
+            console.log("here");
+            $('html, body').animate({
+                scrollTop: 0
+            }, 500)
+        })
+
+    });
     function search(){
-        console.log($("#buscar").val());
+        $('html, body').animate({
+            scrollTop: $("#tabla").offset().top
+        }, 1000);
+        var convenioBuscado = $("#buscar").val();
+        if( convenioBuscado == "")
+        {
+            convenioBuscado = $("#buscar2").val();
+        }
         var parametros = {
-            convenio : $("#buscar").val()
+            convenio : convenioBuscado
         };
         $.ajax({
             data:  parametros,
@@ -128,6 +140,7 @@
             beforeSend: function () {
             },
             success:  function (response){
+                console.log(response);
                 $("#tbody").empty();
                 var data = response.split('|');
                 var i = 0;
@@ -140,9 +153,9 @@
                             res[1] + "</td><td>" +
                             res[2] + "</td><td>" +
                             res[3] + "</td><td>" +
-                            res[4] + '<form method="get" action="DocConvenios/Convenio3.docx">'+
+                            /*res[4] */ '<form method="get" action="DocConvenios/Convenio3.docx">'+
                             "                        <button type=\"submit\" class=\"btn btn-info\"><span class=\"glyphicon glyphicon-download-alt\"></span></button>\n" +
-                            "                    </form></td><td>";
+                            "                    </form></td><tr>";
                         $("#tabla").append(nuevafila);
                         i++;
                     }

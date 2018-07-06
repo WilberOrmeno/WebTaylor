@@ -88,7 +88,7 @@
 
                     </select>
                 </div>
-                <button type="button" class="btn btn-lg" style="background-color: #47525e; color: #FFFFFF; width: 180px">Cancelar</button>
+                <button type="button" class="btn btn-lg" style="background-color: #47525e; color: #FFFFFF; width: 180px" onclick="clean()">Cancelar</button>
                 <input type="button" href="javascript:;" onclick="obtener($('#nombres').val(),
                                                                           $('#apPaterno').val(),
                                                                           $('#apMaterno').val(),
@@ -163,7 +163,7 @@
                 <div class="form-group">
                     <label for="semestre">Semestre</label>
                     <select id="semestre" class="form-control" required>
-                        <option><< Seleccione >></option>
+                        <option value="0"><< Seleccione >></option>
                         <option value="I Semestre">I Semestre</option>
                         <option value="II Semestre">II Semestre</option>
                         <option value="III Semestre">III Semestre</option>
@@ -220,6 +220,12 @@
 </div>
 </div>
 <script>
+    function clean() {
+        $("#nombres").val("");
+        $("#apPaterno").val("");
+        $("#apMaterno").val("");
+        $("#semestree").val("<< Seleccione >>");
+    }
     function guardar(alumno, apePaterno, apeMaterno, NroMat, especialidad, turno, semestre, recibo, fecha, cantidad, concepto, observaciones){
         var parametros = {
             "nombres" : alumno,

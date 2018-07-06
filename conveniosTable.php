@@ -1,4 +1,23 @@
 <?php  include("dbcon.php") ?>
+<hr/>
+<div class="col-md-6" style="padding-left: 40px;">
+    <h1>Listado de convenios</h1>
+</div>
+<div class="col-md-2" style="padding: 10px;">
+    <button class="btn btn-lg btn-warning" id="resgistrarTitulo">Registrar convenio</button>
+</div>
+<div class="col-md-3" align="right" style="padding-top: 15px; padding-left: 30px">
+    <div class="form-group">
+        <input type="text" class="form-control" id="buscar2" placeholder="Buscar">
+        <br>
+    </div>
+</div>
+<div class="col-md-1" align="left" style="padding-top: 15px; padding-left: -50px;">
+    <div class="form-group">
+        <input type="image" id="search" onclick="search()" src="images/search.png" name="image">
+        <br>
+    </div>
+</div>
 <table class="table table-striped" id="tabla">
     <thead>
     <tr>

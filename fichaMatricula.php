@@ -72,16 +72,28 @@
         </ul>
     </nav>
     <div id="content" style="margin-top: 20px; width: 100%">
-        <!--<button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
-            <i class="glyphicon glyphicon-align-left"></i>
-            Toggle Sidebar
-        </button>-->
         <br><br><br>
         <div class="row-fluid" style="padding: 40px; width: 100%">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <h1>Ficha de matrícula</h1>
-
             </div>
+            <div class="col-md-2" style="padding: 10px;">
+                <button class="btn btn-lg btn-warning" id="verAlumnos">Ver alumnos</button>
+            </div>
+            <div class="col-md-3" align="right" style="padding: 13px;">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="buscar" placeholder="Buscar">
+                    <br>
+                </div>
+            </div>
+            <div class="col-md-1" align="left" style="padding-top: 13px; padding-left: -50px;">
+                <div class="form-group">
+                    <input type="image" id="search" onclick="search()" src="images/search.png" name="image">
+                    <br>
+                </div>
+            </div>
+            <hr/><hr/><hr/><hr/>
+            <hr/>
             <form enctype="multipart/form-data" id="formuploadajax" method="post">
                 <div class="col-md-2">
                     <div class="uploader" onclick="$('#filePhoto').click()" style="height: 200px; width: 152px;" >
@@ -279,12 +291,72 @@
                 </div>
             </form>
     </div>
+        <?php include "alumnosTable.php"; ?>
     </div>
-
 </div>
+
 <script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
 
 <script>
+
+    $(document).ready(function () {
+        $('#verAlumnos').click(function (){
+            $('html, body').animate({
+                scrollTop: $("#tablaAlumnos").offset().top
+            }, 1000)
+        }),
+        $('#resgistrarAlumnos').click(function (){
+            console.log("here");
+            $('html, body').animate({
+                scrollTop: 0
+            }, 1000)
+        })
+
+    });
+
+    function search() {
+        $('html, body').animate({
+            scrollTop: $("#tablaAlumnos").offset().top
+        }, 1000);
+        var alumnoBuscado = $("#buscar").val();
+        if( alumnoBuscado == "")
+        {
+            alumnoBuscado = $("#buscar2").val();
+        }
+        var parametros = {
+            alumno : alumnoBuscado
+        };
+        $.ajax({
+            data:  parametros,
+            url:   'searchAlumnos.php',
+            type:  'post',
+            success:  function (response){
+                console.log(response);
+                $("#tbodyAlumnos").empty();
+                var data = response.split('|');
+                var i = 0;
+                $.each(data, function (index, element) {
+                    var res = element.split(',');
+                   if(i<res.length-1)
+                   {
+                       var nuevafila= "<tr><td>" +
+                           res[0] + "</td><td>" +
+                           res[1] + "</td><td>" +
+                           res[2] + "</td><td>" +
+                           res[3] + "</td><td>" +
+                           res[4] + "</td><td>" +
+                           res[5] + "</td><td>" +
+                           res[6] + "</td><td>" +
+                           res[7] + "</td><td>" +
+                           "<button class='btn btn-danger'>Imprimir</button></td></tr>" ;
+                       $("#tablaAlumnos").append(nuevafila);
+                       i++;
+                   }
+                });
+            }
+        })
+    }
+
     var imageLoader = document.getElementById('filePhoto');
     imageLoader.addEventListener('change', handleImage, false);
 

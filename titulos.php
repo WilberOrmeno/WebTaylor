@@ -39,26 +39,31 @@
                 <li><a href="index.html"><span class="glyphicon glyphicon-off" style="top: 2px"></span>  Cerrar sesión</a></li>
             </ul>
         </nav>
-        <div id="content" style="margin-top: 10px; width: 100%">
-            <!--<button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
-                <i class="glyphicon glyphicon-align-left"></i>
-                Toggle Sidebar
-            </button>-->
+        <div id="content" style="margin-top: 20px; width: 100%">
             <br><br><br>
-            <div class="row-fluid" style="padding: 20px; width: 100%">
+            <div class="row-fluid" style="padding: 40px; width: 100%">
                 <div class="col-md-8">
                     <h1>Títulos</h1>
                 </div>
-                <div class="col-md-4" style="top:30px">
-                    <button type="button" class="btn btn-danger" onclick="printDiv()">Imprimir</button>
-                </div>
-                <div class="col-md-6" style="top:15px">
+                <div class="col-md-3" align="right" style="padding: 20px;">
                     <div class="form-group">
-                        <label for="nombreCompleto">Nombre completo</label>
+                        <input type="text" class="form-control" id="buscar" placeholder="Buscar">
+                        <br>
+                    </div>
+                </div>
+                <div class="col-md-1" align="left" style="padding-top: 20px; padding-left: -50px;">
+                    <div class="form-group">
+                        <input type="image" id="search" onclick="search()" src="images/search.png" name="image">
+                        <br>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for= "nombreCompleto">Nombre completo</label>
                         <input type="text" class="form-control" id="nombreCompleto" placeholder="Apellidos y nombres" autofocus>
                     </div>
                 </div>
-                <div class="col-md-6" style="top:15px">
+                <div class="col-md-6">
                     <div class="form-group">
                         <label for="dni">Documento de identidad</label>
                         <input type="text" class="form-control" id="dni" placeholder="DNI">
@@ -101,18 +106,6 @@
                     </div>
                 </div>
                 <div class="col-md-12" style="top:15px" align="right">
-                    <div class="col-md-3" align="right">
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="buscar" placeholder="Buscar">
-                            <br>
-                        </div>
-                    </div>
-                    <div class="col-md-1" align="left">
-                        <div class="form-group">
-                            <input type="image" id="search" onclick="search()" src="images/search.png" name="image">
-                            <br>
-                        </div>
-                    </div>
                     <button type="button" class="btn" style="background-color: #47525e; color: #FFFFFF; width: 180px">Cancelar</button>
                     <input type="button" href="javascript:;" class="btn" style="background-color: #47525e; color: #FFFFFF; width: 180px"
                     onclick="SaveTitulo($('#nombreCompleto').val(),$('#dni').val(),$('#carrera').val(),
@@ -121,131 +114,7 @@
 
                 </div>
                 <div class="col-md-12" style="top: 40px;">
-                    <table class="table table-striped" id="tabla">
-                        <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">DNI</th>
-                            <th scope="col">Teléfono</th>
-                            <th scope="col">Celular</th>
-                            <th scope="col">Carrera</th>
-                            <th scope="col">Seguimiento</th>
-                        </tr>
-                        </thead>
-                        <tbody id="tbody">
-                            <?php
-                                $query = mysqli_query(conectar(),"select * from titulos")or die(mysqli_error(conectar()));
-                                while($row = mysqli_fetch_array($query)) {
-                            ?>
-                            <tr>
-                                <td><?php echo $row['id_titulo']?></td>
-                                <td><?php echo $row['nombres']; ?></td>
-                                <td><?php echo $row['dni']; ?></td>
-                                <td><?php echo $row['telefono']; ?></td>
-                                <td><?php echo $row['celular']; ?></td>
-                                <td><?php echo $row['carrera']; ?></td>
-                                <td>
-                                    <div class="col-md-7" align="right">
-                                    <select class="form-control" id="seguimiento<?php echo $row['id_titulo']?>" onchange="cambioColor(this.value, this.id)" style="width: 200px; font-weight: bold;">
-                                        <?php if($row['seguimiento'] == 1){
-                                            echo "<option value=\"1\" style=\"color: #63de83; font-weight: bold\" selected>Recibido</option>";
-                                            echo "<option value=\"0\" style=\"color: #ebbd30; font-weight: bold\">En espera</option>";
-                                            echo "<option value=\"2\" style=\"color: red; font-weight: bold\">Con observaciones</option>";
-                                        }else if($row['seguimiento'] == 0){
-                                            echo "<option value=\"1\" style=\"color: #63de83; font-weight: bold\" >Recibido</option>";
-                                            echo "<option value=\"0\" style=\"color: #ebbd30; font-weight: bold\" selected>En espera</option>";
-                                            echo "<option value=\"2\" style=\"color: red; font-weight: bold\">Con observaciones</option>";
-                                        } else{
-                                            echo "<option value=\"1\" style=\"color: #63de83; font-weight: bold\" >Recibido</option>";
-                                            echo "<option value=\"0\" style=\"color: #ebbd30; font-weight: bold\" >En espera</option>";
-                                            echo "<option value=\"2\" style=\"color: red; font-weight: bold\" selected>Con observaciones</option>";
-                                        } ?>
-                                    </select>
-                                    </div>
-                                    <div class="col-md-5" align="left">
-                                    <?php
-                                    echo "<button name='edit' id=".$row['id_titulo']." class=\"btn\" data-toggle=\"modal\" data-target=\"#MyModal\" onclick='editTitle(this.id)' ><span class=\"glyphicon glyphicon-edit\"></span></button>".
-                                    "  <button id=".$row['id_titulo']." class=\"btn\" onclick='editTitleState(this.id)'><span class=\"glyphicon glyphicon-floppy-disk\"></span></button>";
-                                    ?>
-                                    </div>
-                                </td>
-                                <div id="MyModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                <h4 class="modal-title">EDITAR INFORMACIÓN DE TÍTULO</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="body-message" id="imprimirEsto">
-                                                    <div class="col-md-6" style="top:15px">
-                                                        <div class="form-group">
-                                                            <label for="nombreCompleto">Nombre completo</label>
-                                                            <input type="text" class="form-control" id="nombreCompletoE" placeholder="Apellidos y nombres" autofocus>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6" style="top:15px">
-                                                        <div class="form-group">
-                                                            <label for="dni">Documento de identidad</label>
-                                                            <input type="text" class="form-control" id="dniE" placeholder="DNI">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4" style="top:15px">
-                                                        <div class="form-group">
-                                                            <label for="carrera">Carrera</label>
-                                                            <input type="text" class="form-control" id="carreraE" placeholder="Carrera">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4" style="top:15px">
-                                                        <div class="form-group">
-                                                            <label for="dni">Teléfono</label>
-                                                            <input type="text" class="form-control" id="telefonoE" placeholder="Teléfono">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4" style="top:15px">
-                                                        <div class="form-group">
-                                                            <label for="celular">Celular</label>
-                                                            <input type="text" class="form-control" id="celularE" placeholder="Celular">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-2" style="top:15px">
-                                                        <div class="form-group">
-                                                            <label for="sede">Sede</label>
-                                                            <input type="text" class="form-control" id="sedeE" placeholder="Sede">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-5" style="top:15px">
-                                                        <div class="form-group">
-                                                            <label for="iniciotermino">Inicio/término</label>
-                                                            <input type="text" class="form-control" id="inicioterminoE" placeholder="Inicio/término">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-5" style="top:15px">
-                                                        <div class="form-group">
-                                                            <label for="obs">Observaciones</label>
-                                                            <input type="text" class="form-control" id="obsE" placeholder="Observaciones">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="divider"></div>
-                                                <br><br><br><br><br><br><br><br><br><br><br><br>
-
-                                            </div>
-                                            <div class="modal-footer">
-                                                <center>
-                                                    <button class="btn btn-warning" data-dismiss="modal" aria-hidden="true">Cancelar</button>
-                                                    <button id="btnDelete" type="button" class="btn btn-success" data-dismiss="modal" onclick="saveTitleEdited()">Guardar</button>
-                                                </center>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </tr>
-                            <?php } ?>
-                        </tbody>
-                    </table>
+                    <?php include "titulosTable.php"?>
                 </div>
             </div>
         </div>
@@ -268,10 +137,26 @@
         doc.save('sample-file.pdf');
 
     }
+    $(document).ready(function () {
+            $('#resgistrarTitulo').click(function (){
+                console.log("here");
+                $('html, body').animate({
+                    scrollTop: 0
+                }, 500)
+            })
+
+    });
     function search(){
-        console.log($("#buscar").val());
+        $('html, body').animate({
+            scrollTop: $("#tabla").offset().top
+        }, 1000);
+        var tituloBuscado = $("#buscar").val();
+        if( tituloBuscado == "")
+        {
+            tituloBuscado = $("#buscar2").val();
+        }
         var parametros = {
-            nombres  : $("#buscar").val()
+            nombres  : tituloBuscado
         };
         $.ajax({
             data:  parametros,

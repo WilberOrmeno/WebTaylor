@@ -42,28 +42,39 @@
     <div id="content" style="margin-top: 20px; width: 100%">
         <br><br><br>
         <div class="row-fluid" style="padding: 40px; width: 100%">
-            <div class="col-md-12">
+            <div class="col-md-8" style="padding-left: 40px;">
                 <h1>Registro de notas</h1>
-
+            </div>
+            <div class="col-md-3" align="right" style="padding: 15px;">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="buscar" placeholder="Buscar">
+                    <br>
+                </div>
+            </div>
+            <div class="col-md-1" align="left" style="padding-top: 15px; padding-left: -50px;">
+                <div class="form-group">
+                    <input type="image" id="search" onclick="search()" src="images/search.png" name="image">
+                    <br>
+                </div>
             </div>
             <form enctype="multipart/form-data" id="formuploadajax" method="post">
             <div id="parte1" style="display: block;">
                 <div class="col-md-5 col-md-offset-1" style="top:15px">
                     <div class="form-group">
                         <label for="carrera">Carrera profesional</label>
-                        <input type="text" class="form-control" id="carrera" name="carrera" placeholder="Nombres" autofocus>
+                        <input type="text" class="form-control" id="carrera" name="carrera" placeholder="Carrera" autofocus>
                     </div>
                     <div class="form-group">
                         <label for="modulo">Módulo formativo N°</label>
-                        <input type="text" class="form-control" id="modulo" name="modulo" placeholder="Apellido Paterno">
+                        <input type="text" class="form-control" id="modulo" name="modulo" placeholder="Módulo formativo">
                     </div>
                     <div class="form-group">
                         <label for="denominacion">Denominación</label>
-                        <input type="text" class="form-control" id="denominacion" name="denominacion" placeholder="Apellido Materno">
+                        <input type="text" class="form-control" id="denominacion" name="denominacion" placeholder="Denominación">
                     </div>
                     <div class="form-group">
                         <label for="docente">Docente</label>
-                        <input type="text" class="form-control" id="docente" name="docente" placeholder="Apellido Materno">
+                        <input type="text" class="form-control" id="docente" name="docente" placeholder="Docente">
                     </div>
                 </div>
                 <div class="col-md-5" style="top:15px" >
@@ -71,15 +82,15 @@
 
                         <div class="form-group">
                             <label for="periodo">Periodo académico</label>
-                            <input type="text" class="form-control" id="periodo" name="periodo" placeholder="Apellido Materno">
+                            <input type="text" class="form-control" id="periodo" name="periodo" placeholder="Periodo académico">
                         </div>
                         <div class="form-group">
                             <label for="creditos">Créditos</label>
-                            <input type="text" class="form-control" id="creditos" name="creditos" placeholder="Apellido Materno">
+                            <input type="text" class="form-control" id="creditos" name="creditos" placeholder="Créditos">
                         </div>
                         <div class="form-group">
                             <label for="horas">Horas semanales</label>
-                            <input type="text" class="form-control" id="horas" name="horas" placeholder="Apellido Materno">
+                            <input type="text" class="form-control" id="horas" name="horas" placeholder="Horas semanales">
                         </div>
                     </div>
                     <center>
@@ -196,12 +207,67 @@
                 </div>
             </div>
             </form>
-
+        <?php include "notasTable.php"?>
     </div>
 </div>
 </div>
 
 <script>
+    $(document).ready(function () {
+        $('#verAlumnos').click(function (){
+            $('html, body').animate({
+                scrollTop: $("#tablaAlumnos").offset().top
+            }, 1000)
+        }),
+            $('#resgistrarNotas').click(function (){
+                $('html, body').animate({
+                    scrollTop: 0
+                }, 1000)
+            })
+
+    });
+    function search() {
+        $('html, body').animate({
+            scrollTop: $("#tablaNotas").offset().top
+        }, 1000);
+        var notasBuscadas = $("#buscar").val();
+        if( notasBuscadas == "")
+        {
+            notasBuscadas = $("#buscar2").val();
+        }
+        var parametros = {
+            notas : notasBuscadas
+        };
+        $.ajax({
+            data:  parametros,
+            url:   'searchNotas.php',
+            type:  'post',
+            success:  function (response){
+                console.log(response);
+                $("#tbodyNotas").empty();
+                var data = response.split('|');
+                var i = 0;
+                $.each(data, function (index, element) {
+                    var res = element.split(',');
+                    if(i<res.length)
+                    {
+                        var nuevafila= "<tr><td>" +
+                            res[0] + "</td><td>" +
+                            res[1] + "</td><td>" +
+                            res[2] + "</td><td>" +
+                            res[3] + "</td><td>" +
+                            res[4] + "</td><td>" +
+                            res[5] + "</td><td>" +
+                            "<button class='btn btn-info'>Ver detalle</button></td></tr>" ;
+                        $("#tablaNotas").append(nuevafila);
+                        i++;
+                    }
+                });
+            }
+        })
+    }
+
+
     function  next() {
         $("#parte1").hide();
         $("#parte2").show();

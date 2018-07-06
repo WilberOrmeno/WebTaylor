@@ -49,7 +49,6 @@
         <div class="row-fluid" style="padding: 40px; width: 100%">
             <div class="col-md-8">
                 <h1>Estado de cuenta</h1>
-
             </div>
             <div class="col-md-4" align="right">
                  <button type="button" class="btn btn-lg" style="background-color: #47525e; color: #FFFFFF; width: 180px"
@@ -64,10 +63,7 @@
                     <label for="apPaterno">Apellido Paterno</label>
                     <input type="text" class="form-control" id="apPaterno" placeholder="Apellido Paterno">
                 </div>
-                <div class="form-group" style="padding-top: 30px;">
-
-                    <button type="button" class="btn btn-danger" onclick="printDiv()" style="top: 50px">Imprimir</button>
-                </div>
+                <button class="btn btn-lg btn-danger" onclick="printElement()" style="margin-top: 30px;">Imprimir</button>
             </div>
             <div class="col-md-5" style="top:15px" >
                 <div style=" width: 500px; height: 180px; margin-bottom:10px;">
@@ -296,3 +292,57 @@
 </script>
 </body>
 </html>
+
+<style>
+    @media screen {
+        #printSection {
+            display: none;
+        }
+    }
+
+    @media print {
+        body * {
+            visibility:hidden;
+        }
+        #printSection, #printSection * {
+            visibility:visible;
+        }
+        #printSection {
+            position:absolute;
+            left:0;
+            top:0;
+        }
+    }
+
+</style>
+<script type="application/javascript">
+
+    function printElement() {
+        var elem = document.getElementById("tabla");
+        var elem2 = document.createElement("div");
+        var title = document.createElement("h2");
+
+        var t = document.createTextNode("ESTADO DE CUENTA");
+        var elem3 = elem.cloneNode(true);
+
+        title.appendChild(t);
+        elem2.appendChild(title);
+        elem2.appendChild(elem3);
+
+        elem2.setAttribute("align","center");
+        elem2.setAttribute("style", "color:red; padding-left: 25%");
+        var domClone = elem2.cloneNode(true);
+
+        var $printSection = document.getElementById("printSection");
+
+        if (!$printSection) {
+            var $printSection = document.createElement("div");
+            $printSection.id = "printSection";
+            document.body.appendChild($printSection);
+        }
+
+        $printSection.innerHTML = "";
+        $printSection.appendChild(domClone);
+        window.print();
+    }
+</script>

@@ -58,6 +58,7 @@
                 </div>
             </div>
             <form enctype="multipart/form-data" id="formuploadajax" method="post">
+                <input type="text" id="cantidadAlumnos2" style="display: none">
             <div id="parte1" style="display: block;">
                 <div class="col-md-5 col-md-offset-1" style="top:15px">
                     <div class="form-group">
@@ -102,8 +103,8 @@
             </div>
             <div id="parte2" style="display: none">
                 <div class="col-md-12" style="top:15px" >
-                    <label for="apMaterno">Cantidad de alumnos</label>
-                    <select name="cantidadAlumnos" onchange="rows()" class="form-control" id="cantidadAlumnos">
+                    <label for="cantidadAlumnos">Cantidad de alumnos</label>
+                    <select id="cantidadAlumnos" name="cantidadAlumnos" onchange="rows()" class="form-control" id="cantidadAlumnos">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -118,6 +119,22 @@
                         <option value="12">12</option>
                         <option value="13">13</option>
                         <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                        <option value="24">24</option>
+                        <option value="25">25</option>
+                        <option value="26">26</option>
+                        <option value="27">27</option>
+                        <option value="28">28</option>
+                        <option value="29">29</option>
+                        <option value="30">30</option>
                     </select>
                     <br>
                     <br>
@@ -318,7 +335,7 @@
             container2.appendChild(input);
         }
         for (i=0;i<number;i++){
-            var form = document.createElement("div ");
+            var form = document.createElement("div");
             form.setAttribute("class", "form-group");
             form.id = "formc1" + i;
             c1.appendChild(form);
@@ -434,6 +451,9 @@
 
     $(function(){
         $("#formuploadajax").on("submit", function(e){
+
+            $("#cantidadAlumnos2").val($("#cantidadAlumnos").val());
+            console.log($("#cantidadAlumnos2").val());
             e.preventDefault();
             var f = $(this);
             var formData = new FormData(document.getElementById("formuploadajax"));

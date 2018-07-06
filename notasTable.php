@@ -3,6 +3,8 @@
 <hr/>
 <hr/>
 <hr/>
+<br>
+<br>
 <div class="col-md-6" style="padding-left: 40px;">
     <h1>Listado de notas</h1>
 </div>

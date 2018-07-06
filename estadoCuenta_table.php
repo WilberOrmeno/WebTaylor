@@ -1,4 +1,5 @@
 <?php  include("dbcon.php") ?>
+<button class="btn btn-lg btn-danger" onclick="printElement()">Imprimir</button>
 <table class="table table-striped">
     <thead>
     <tr>

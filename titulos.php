@@ -121,22 +121,7 @@
     </div>
 </body>
 <div id="editor"></div>
-<script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
 <script type="application/javascript">
-    function printDiv() {
-        var doc = new jsPDF();
-        var specialElementHandlers = {
-            '#editor': function (element, renderer) {
-                return true;
-            }
-        };
-        doc.fromHTML($('#tabla').html(), 15, 15, {
-            'width': 170,
-            'elementHandlers': specialElementHandlers
-        });
-        doc.save('sample-file.pdf');
-
-    }
     $(document).ready(function () {
             $('#resgistrarTitulo').click(function (){
                 console.log("here");
@@ -332,3 +317,56 @@
     }
 </script>
 </html>
+<style>
+    @media screen {
+        #printSection {
+            display: none;
+        }
+    }
+
+    @media print {
+        body * {
+            visibility:hidden;
+        }
+        #printSection, #printSection * {
+            visibility:visible;
+        }
+        #printSection {
+            position:absolute;
+            left:0;
+            top:0;
+        }
+    }
+
+</style>
+<script type="application/javascript">
+
+    function printElement() {
+        var elem = document.getElementById("tabla");
+        var elem2 = document.createElement("div");
+        var title = document.createElement("h2");
+
+        var t = document.createTextNode("LISTADO DE TÍTULOS");
+        var elem3 = elem.cloneNode(true);
+
+        title.appendChild(t);
+        elem2.appendChild(title);
+        elem2.appendChild(elem3);
+
+        elem2.setAttribute("align","center");
+        //elem2.setAttribute("style", "color:red; padding-left: 25%");
+        var domClone = elem2.cloneNode(true);
+
+        var $printSection = document.getElementById("printSection");
+
+        if (!$printSection) {
+            var $printSection = document.createElement("div");
+            $printSection.id = "printSection";
+            document.body.appendChild($printSection);
+        }
+
+        $printSection.innerHTML = "";
+        $printSection.appendChild(domClone);
+        window.print();
+    }
+</script>

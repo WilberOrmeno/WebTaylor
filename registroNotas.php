@@ -39,7 +39,7 @@
             <li><a href="index.html"><span class="glyphicon glyphicon-off" style="top: 2px"></span>  Cerrar sesión</a></li>
         </ul>
     </nav>
-    <div id="content" style="margin-top: 20px; width: 100%">
+    <div id="content" style="margin-top: 20px; width: 100%; background-color: white">
         <br><br><br>
         <div class="row-fluid" style="padding: 40px; width: 100%">
             <div class="col-md-8" style="padding-left: 40px;">
@@ -318,7 +318,7 @@
             container2.appendChild(input);
         }
         for (i=0;i<number;i++){
-            var form = document.createElement("div");
+            var form = document.createElement("div ");
             form.setAttribute("class", "form-group");
             form.id = "formc1" + i;
             c1.appendChild(form);
@@ -453,9 +453,6 @@
             });
         });
     });
-    function print() {
-        console.log("asdasd");
-    }
 </script>
 </body>
 <div id="myModal" class="modal fade" role="dialog">

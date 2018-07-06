@@ -71,7 +71,7 @@
             <li><a href="index.html"><span class="glyphicon glyphicon-off" style="top: 2px"></span>  Cerrar sesión</a></li>
         </ul>
     </nav>
-    <div id="content" style="margin-top: 20px; width: 100%">
+    <div id="content" style="margin-top: 20px; width: 100%; background-color: #fff;">
         <br><br><br>
         <div class="row-fluid" style="padding: 40px; width: 100%">
             <div class="col-md-6">
@@ -388,34 +388,7 @@
             });
         });
     });
-    function print(){
-      var parametros = {
-            "id" : "1"
-        };
-        $.ajax({
-            data:  parametros,
-            url:   'getLastStudent.php',
-            type:  'post',
-            beforeSend: function () {
-                $("#resultado").html("Procesando, espere por favor...");
-            },
-            success:  function (response) {
-                console.log(response)
-                $("#resultado").html(response);
-                var doc = new jsPDF();
-                var specialElementHandlers = {
-                    '#editor': function (element, renderer) {
-                        return true;
-                    }
-                };
-                doc.fromHTML($('#resultado').html(), 15, 15, {
-                    'width': 500,
-                    'elementHandlers': specialElementHandlers
-                });
-                doc.save('sample-file.pdf');
-            }
-        });
-    }
+
 </script>
 <span id="resultado"></span>
 

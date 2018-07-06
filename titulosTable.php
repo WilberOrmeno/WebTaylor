@@ -1,6 +1,9 @@
 <hr/>
-<div class="col-md-6" style="padding-left: 40px;">
-    <h1>Listado de títulos</h1>
+<div class="col-md-4" style="padding-left: 40px;">
+    <h1>Lista de títulos</h1>
+</div>
+<div class="col-md-2" style="padding-top: 10px;" align="right">
+    <button class="btn btn-lg btn-danger" onclick="printElement()">Imprimir</button>
 </div>
 <div class="col-md-2" style="padding: 10px;">
     <button class="btn btn-lg btn-warning" id="resgistrarTitulo">Registrar título</button>

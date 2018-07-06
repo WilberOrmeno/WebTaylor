@@ -17,7 +17,5 @@ $observaciones= $_POST['observaciones'];
 $query = "INSERT INTO `recibos`( `nombres`, `ape_paterno`, `ape_materno`, `nro_matricula`, `especialidad`, `turno`, `semestre`, `recibo`, `fecha`, `cantidad`, `concepto`, `observaciones`) 
 VALUES ('$nombres','$apePaterno','$apeMaterno','$NroMat','$especialidad','$turno','$semestre','$recibo','$fecha','$cantidad','$concepto','$observaciones')";
 $stmt = mysqli_query($con,$query)
-
-
 ?>
 

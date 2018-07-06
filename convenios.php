@@ -69,9 +69,6 @@
                     <label for="vencimiento">Vencimiento</label>
                     <input type="text" class="form-control" name="vencimiento" id="vencimiento" placeholder="dia/mes/año">
                 </div>
-                <div class="form-group" style="padding-top: 30px;">
-                    <button type="button" class="btn btn-danger" onclick="printDiv()" style="top: 50px">Imprimir</button>
-                </div>
             </div>
 
             <div class="col-md-7" style="left: 30px ;top:15px" align="right">
@@ -154,8 +151,8 @@
                             res[2] + "</td><td>" +
                             res[3] + "</td><td>" +
                             /*res[4] */ '<form method="get" action="DocConvenios/Convenio3.docx">'+
-                            "                        <button type=\"submit\" class=\"btn btn-info\"><span class=\"glyphicon glyphicon-download-alt\"></span></button>\n" +
-                            "                    </form></td><tr>";
+                            "<button type=\"submit\" class=\"btn btn-info\"><span class=\"glyphicon glyphicon-download-alt\"></span></button>\n" +
+                            "</form></td><tr>";
                         $("#tabla").append(nuevafila);
                         i++;
                     }
@@ -207,3 +204,57 @@
     });
 </script>
 </html>
+
+<style>
+    @media screen {
+        #printSection {
+            display: none;
+        }
+    }
+
+    @media print {
+        body * {
+            visibility:hidden;
+        }
+        #printSection, #printSection * {
+            visibility:visible;
+        }
+        #printSection {
+            position:absolute;
+            left:0;
+            top:0;
+        }
+    }
+
+</style>
+<script type="application/javascript">
+
+    function printElement() {
+        var elem = document.getElementById("tabla");
+        var elem2 = document.createElement("div");
+        var title = document.createElement("h2");
+
+        var t = document.createTextNode("LISTADO DE CONVENIOS");
+        var elem3 = elem.cloneNode(true);
+
+        title.appendChild(t);
+        elem2.appendChild(title);
+        elem2.appendChild(elem3);
+
+        elem2.setAttribute("align","center");
+        elem2.setAttribute("style", "color:red; padding-left: 25%");
+        var domClone = elem2.cloneNode(true);
+
+        var $printSection = document.getElementById("printSection");
+
+        if (!$printSection) {
+            var $printSection = document.createElement("div");
+            $printSection.id = "printSection";
+            document.body.appendChild($printSection);
+        }
+
+        $printSection.innerHTML = "";
+        $printSection.appendChild(domClone);
+        window.print();
+    }
+</script>

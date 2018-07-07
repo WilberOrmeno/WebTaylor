@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-06-2018 a las 20:08:52
+-- Tiempo de generación: 07-07-2018 a las 11:29:31
 -- Versión del servidor: 10.1.31-MariaDB
 -- Versión de PHP: 7.2.3
 
@@ -59,16 +59,9 @@ CREATE TABLE `alumnos` (
   `celular` varchar(9) NOT NULL,
   `email` varchar(50) NOT NULL,
   `IESecundaria` varchar(50) NOT NULL,
-  `otroCS` varchar(50) NOT NULL
+  `otroCS` varchar(50) NOT NULL,
+  `foto` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `alumnos`
---
-
-INSERT INTO `alumnos` (`id_alumno`, `nombre`, `sexo`, `eCivil`, `DepartamentoNac`, `ProvinciaNac`, `DistritoNac`, `fecnac`, `edad`, `direccion`, `DistritoDireccion`, `telefono`, `celular`, `email`, `IESecundaria`, `otroCS`) VALUES
-(1, 'Javier Ormeño Vera', 'Masculino', 'Soltero', 'Lima', 'Lima', 'Lima', '11/02/1996', 22, 'aaaaaaaaa', 'Lima', '987456321', '987456321', 'javier@gmail.com', 'Colegio aaa', 'bbbb'),
-(2, 'Marcela Andrade Salinas', 'Femenino', 'Soltero', 'Lima', 'Lima', 'Lima', '11/02/1996', 22, 'aaaaaaaaa', 'Lima', '789456123', '987456321', 'marcela@gmail.com', 'Colegio aaa', 'bbbb');
 
 -- --------------------------------------------------------
 
@@ -83,16 +76,6 @@ CREATE TABLE `convenios` (
   `vencimiento` varchar(30) NOT NULL,
   `rutaConvenio` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `convenios`
---
-
-INSERT INTO `convenios` (`id`, `convenio`, `entidad`, `vencimiento`, `rutaConvenio`) VALUES
-(1, 'Convenio1.docx', 'Hospital Test1', '11/12/18', 'DocConvenios/Convenio1.docx'),
-(2, 'Convenio2.docx', 'Universidad Test1', '08/01/17', 'DocConvenios/Convenio2.docx'),
-(3, 'Convenio3.docx', 'Hospital Test2', '19/02/18', 'DocConvenios/Convenio3.docx'),
-(4, '', 'we', 'we', 'DocConvenios/');
 
 -- --------------------------------------------------------
 
@@ -114,14 +97,6 @@ CREATE TABLE `datosacademicos` (
   `Semestre` varchar(10) NOT NULL,
   `anio` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `datosacademicos`
---
-
-INSERT INTO `datosacademicos` (`id`, `id_alumno`, `especialidad`, `ciclo`, `turno`, `ocupacion`, `dni`, `COB`, `otros`, `uCiclo`, `Semestre`, `anio`) VALUES
-(1, 1, 'Computación', '2', 'Tarde', '----', '78945612', '---', '---', '1', 'II SEMESTR', '2018'),
-(2, 2, 'Enfermería', '1', 'Tarde', '----', '89456123', '---', '---', '1', 'I SEMESTRE', '2018');
 
 -- --------------------------------------------------------
 
@@ -182,14 +157,6 @@ CREATE TABLE `recibos` (
   `observaciones` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `recibos`
---
-
-INSERT INTO `recibos` (`id_alumno`, `nombres`, `ape_paterno`, `ape_materno`, `nro_matricula`, `especialidad`, `turno`, `semestre`, `recibo`, `fecha`, `cantidad`, `concepto`, `observaciones`) VALUES
-(1, 'Javier', 'Ormeño', 'Vera', 123, 'Computación', 'Mañana', 'I Semestre', '001', '31/03/18', '500', 'Pago1', 'Pago del primer mes'),
-(2, 'Marcela', 'Andrade', 'Salinas', 124, 'Enfermería', 'Tarde', 'II Semestre', '123', '31/03/18', '600', 'Pago1', 'Pago del primer mes');
-
 -- --------------------------------------------------------
 
 --
@@ -208,15 +175,6 @@ CREATE TABLE `titulos` (
   `observaciones` text NOT NULL,
   `seguimiento` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `titulos`
---
-
-INSERT INTO `titulos` (`id_titulo`, `nombres`, `dni`, `carrera`, `telefono`, `celular`, `sede`, `inicio/termino`, `observaciones`, `seguimiento`) VALUES
-(1, 'Javier OrmeÃ±o Vera', '72416642', 'ComputaciÃ³n', '994318344', '994318344', 'Lima', '---', '----', 1),
-(2, 'Marcela Andrade Salinas', '72416642', 'EnfemerÃ¡a	', '994318344', '994318344', 'Lima', '----', '----', 1),
-(3, 'Elvis Velasque Espinoza', '98745632', 'ComputaciÃ³n', '987654312', '987654312', 'Lima', '----', '----', 1);
 
 -- --------------------------------------------------------
 
@@ -313,19 +271,19 @@ ALTER TABLE `actividadesextracurriculares`
 -- AUTO_INCREMENT de la tabla `alumnos`
 --
 ALTER TABLE `alumnos`
-  MODIFY `id_alumno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_alumno` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `convenios`
 --
 ALTER TABLE `convenios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `datosacademicos`
 --
 ALTER TABLE `datosacademicos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `notas`
@@ -343,13 +301,13 @@ ALTER TABLE `notasdetalle`
 -- AUTO_INCREMENT de la tabla `recibos`
 --
 ALTER TABLE `recibos`
-  MODIFY `id_alumno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_alumno` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `titulos`
 --
 ALTER TABLE `titulos`
-  MODIFY `id_titulo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_titulo` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `users`

@@ -179,12 +179,12 @@
                             res[4] + "</td><td>" +
                             res[5] + "</td><td>" +
                             "<div class=\"col-md-7\" align=\"right\">" +
-                            "<select class=\"form-control\" id=\"seguimiento\" onchange=\"cambioColor(this.value, this.id)\" style=\"width: 200px; font-weight: bold;\">\n" +
+                            "<select class='form-control' id='seguimiento"+res[0]+"' onchange='cambioColor(this.value, this.id)' style='width: 200px; font-weight: bold;'>\n" +
                             options +
                             "</select></div><div class=\"col-md-5\" align=\"left\">"+
 
-                            "<button name='edit' id='' class='btn' data-toggle=\"modal\" data-target=\"#MyModal\" onclick='editTitle(this.id)' disabled><span class=\"glyphicon glyphicon-edit\" ></span></button>" +
-                            "<button id='' class='btn' onclick='editTitleState(this.id)' disabled><span class=\"glyphicon glyphicon-floppy-disk\" ></span></button>" +
+                            "<button name='edit' id='"+res[0]+"' class='btn' data-toggle=\"modal\" data-target=\"#MyModal\" onclick='editTitle(this.id)' ><span class=\"glyphicon glyphicon-edit\" ></span></button>" +
+                            "<button id='"+res[0]+"' class='btn' onclick='editTitleState(this.id)' ><span class=\"glyphicon glyphicon-floppy-disk\" ></span></button>" +
                             "</div></td><tr>";
 
                         $("#tabla").append(nuevafila);
@@ -200,7 +200,18 @@
 
                 });
             }
-        })
+        });
+
+        for(i = 1; i< 100; i++){
+            var value = $("#seguimiento"+i).val();
+            if(value == 0){
+                $("#seguimiento"+i).css("color", "#ebbd30");
+            }else if (value == 1){
+                $("#seguimiento"+i).css("color", "#63de83");
+            }else{
+                $("#seguimiento"+i).css("color", "red");
+            }
+        }
     }
     var i = 0;
     for(i = 1; i< 100; i++){

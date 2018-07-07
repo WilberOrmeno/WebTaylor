@@ -9,29 +9,16 @@ $periodo = $_POST["periodo"];
 $creditos = $_POST["creditos"];
 $horas = $_POST["horas"];
 
-$alumno0 = $_POST["alumno0"];
-$alumno1 = $_POST["alumno1"];
-$c10 = $_POST["c10"];
-$c11 = $_POST["c11"];
-$c20 = $_POST["c20"];
-$c21 = $_POST["c21"];
-$c30 = $_POST["c30"];
-$c31 = $_POST["c31"];
-$c40 = $_POST["c40"];
-$c41 = $_POST["c41"];
-$c50 = $_POST["c50"];
-$c51 = $_POST["c51"];
-$c60 = $_POST["c60"];
-$c61 = $_POST["c61"];
-$c70 = $_POST["c70"];
-$c71 = $_POST["c71"];
-$c80 = $_POST["c80"];
-$c81 = $_POST["c81"];
+$cantidad = $_POST["cantidadAlumnos"];
+
+
+
 
 
 $query = "INSERT INTO `notas`(`carrera`, `modulo`, `denominacion`, `docente`, `periodo`, `creditos`, `horas`) 
-VALUES ('$carrera','$modulo', '$denominacion','$docente','$periodo','$creditos','$horas')";
+VALUES ('$carrera','$modulo', '$denominacion','$cantidad','$periodo','$creditos','$horas')";
 $stmt = mysqli_query($con,$query);
+$i = 0;
 
 $query2= "SELECT * FROM `notas`";
 $stmt2 = mysqli_query($con,$query2);
@@ -39,12 +26,32 @@ $id = 0;
 while($extraido = mysqli_fetch_array($stmt2) ) {
     $id = $extraido['id'];
 }
-
-$query3= "INSERT INTO `notasdetalle`(`idNotas`,`alumno`, `c1`, `c2`, `c3`, `c4`, `c5`, `c6`, `c7`, `c8`) 
-VALUES ('$id','$alumno0', '$c10','$c20','$c30','$c40','$c50','$c60','$c70','$c80'),
- ('$id','$alumno1', '$c11','$c21','$c31','$c41','$c51','$c61','$c71','$c81')";
-$stmt3 = mysqli_query($con,$query3);
-
+while ($i < $cantidad){
+    echo "here";
+    $alumnoid = "alumno".$i;
+    $alumno = $_POST[$alumnoid];
+    $c1id = "c1".$i;
+    $c1 = $_POST[$c1id];
+    $c2id = "c2".$i;
+    $c2 = $_POST[$c2id];
+    $c3id = "c3".$i;
+    $c3 = $_POST[$c3id];
+    $c4id = "c4".$i;
+    $c4 = $_POST[$c4id];
+    $c5id = "c5".$i;
+    $c5 = $_POST[$c5id];
+    $c6id = "c6".$i;
+    $c6 = $_POST[$c6id];
+    $c7id = "c7".$i;
+    $c7 = $_POST[$c7id];
+    $c8id = "c8".$i;
+    $c8 = $_POST[$c8id];
+    $query3= "INSERT INTO `notasdetalle`(`idNotas`,`alumno`, `c1`, `c2`, `c3`, `c4`, `c5`, `c6`, `c7`, `c8`) 
+            VALUES ('$id','$alumno', '$c1','$c2','$c3','$c4','$c5','$c6','$c7','$c8')";
+    echo $query3;
+    $stmt3 = mysqli_query($con,$query3);
+    $i++;
+}
 
 
 

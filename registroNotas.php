@@ -171,7 +171,7 @@
 
                 <div class="col-md-4" style="top:15px" id="container">
                     <div class="form-group">
-                        <input type="text" class="form-control" name="alumno" placeholder="Alumno">
+                        <input type="text" class="form-control" name="alumno0" placeholder="Alumno">
                     </div>
 
                 </div>
@@ -219,7 +219,7 @@
                     <center>
                         <button type="button" class="btn btn-lg" style="background-color: #47525e; color: #FFFFFF; width: 180px">Cancelar</button>
                         <button type="button" class="btn btn-lg" style="background-color: #47525e; color: #FFFFFF; width: 180px" onclick="previous()">Anterior</button>
-                        <input type="submit" class="btn btn-lg" style="background-color: #47525e; color: #FFFFFF; width: 180px" value="Guardar" data-toggle="modal" data-target="#myModal"/>
+                        <input type="submit" class="btn btn-lg" style="background-color: #47525e; color: #FFFFFF; width: 180px" value="Guardar"/>
                     </center>
                 </div>
             </div>
@@ -275,7 +275,7 @@
                             res[3] + "</td><td>" +
                             res[4] + "</td><td>" +
                             res[5] + "</td><td>" +
-                            "<button class='btn btn-info'>Ver detalle</button></td></tr>" ;
+                            "<button class='btn btn-danger' onclick='printElement("+res[0]+")'>Imprimir</button></td></tr>" ;
                         $("#tablaNotas").append(nuevafila);
                         i++;
                     }
@@ -469,27 +469,10 @@
             })
             .done(function(res){
                 $.jGrowl("Registro agregado con éxito", { header: 'Agregado' });
-                //setTimeout(location.reload.bind(location), 1500);
+                setTimeout(location.reload.bind(location), 1500);
             });
         });
     });
 </script>
 </body>
-<div id="myModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">¿Deseas imprimir este registro?</h4>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-info" data-dismiss="modal">NO</button>
-                <button type="button" class="btn btn-success" data-dismiss="modal" onclick="print()">SI</button>
-            </div>
-        </div>
-
-    </div>
-</div>
 </html>

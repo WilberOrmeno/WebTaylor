@@ -11,7 +11,8 @@ while($extraido = mysqli_fetch_array($stmt) ) {
         .$extraido['nombre'].','
         .$extraido['telefono'].','
         .$extraido['celular'].','
-        .$extraido['email'].',';
+        .$extraido['foto'].','
+    .$extraido['email'].',';
     $id = $extraido['id_alumno'];
     $query2 = "SELECT * FROM `datosacademicos` WHERE `id_alumno` = '$id'";
     $stmt2 = mysqli_query($con,$query2);
@@ -20,6 +21,7 @@ while($extraido = mysqli_fetch_array($stmt) ) {
         .$extraido2['ciclo'].','
         .$extraido2['turno'].'|';
     }
+
 }
 echo $data;
 ?>

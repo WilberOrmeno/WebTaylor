@@ -57,17 +57,16 @@
             }
 
             ?>
-            <td><button type="button" class="btn btn-info" onclick="printElement(<?php echo $row['id_alumno']?>)">Imprimir</button></td>
+            <td><button type="button" class="btn btn-danger" onclick="printElement(<?php echo $row['id_alumno']?>)">Imprimir</button></td>
             <div id="<?php echo "printThis".$row['id_alumno'] ?>" style="display: block; position: absolute; z-index: -19; width: 900px; top: 50px;">
-                <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="col-xs-12 col-sm-12 text-center">
                             <h1>FICHA DE MATRÍCULA</h1>
                         </div>
                         <div class="col-xs-4 col-sm-4 text-left"></div>
-                        <div class="col-xs-4 col-sm-4 text-right">
-                            <img src="images/cetapsi-sinfondo.png" id="logo" style="height: 200px;">
+                        <div class="col-xs-4 col-sm-4 text-center">
+                            <img src="<?php echo $row['foto'] ?>" id="foto" style="height: 200px; border: 1px solid white; border-radius: 20px">
                         </div>
                     </div>
                     <div class="col-xs-12 col-xs-offset divider" style="top: 30px; ">

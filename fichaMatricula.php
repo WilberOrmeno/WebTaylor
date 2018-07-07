@@ -193,7 +193,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="edad">Edad</label>
-                        <input type="text" class="form-control" id="fecnac"  name="fecnac" placeholder="Edad">
+                        <input type="text" class="form-control" id="edad"  name="edad" placeholder="Edad">
                     </div>
                 </div>
                 <div class="col-md-9">
@@ -263,7 +263,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <input type="checkbox" value="1" id="musica"  name="musica"  style="width: 20px; height: 20px;">
+                        <input type="checkbox" value="1" id="musica"  name="musica"  style="9: 20px; height: 20px;">
                         <label for="musica">Música</label>
                     </div>
                 </div>
@@ -287,16 +287,13 @@
                 </div>
                 <div class="col-md-12" style="top:15px; padding-bottom: 50px;" align="right">
                     <button type="button" class="btn" style="background-color: #47525e; color: #FFFFFF; width: 180px">Cancelar</button>
-                    <button type="submit" class="btn" style="background-color: #47525e; color: #FFFFFF; width: 180px" data-toggle="modal" data-target="#myModal">Agregar</button>
+                    <button type="submit" class="btn" style="background-color: #47525e; color: #FFFFFF; width: 180px">Agregar</button>
                 </div>
             </form>
     </div>
         <?php include "alumnosTable.php"; ?>
     </div>
 </div>
-
-<script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
-
 <script>
 
     $(document).ready(function () {
@@ -348,7 +345,7 @@
                            res[5] + "</td><td>" +
                            res[6] + "</td><td>" +
                            res[7] + "</td><td>" +
-                           "<button class='btn btn-danger'>Imprimir</button></td></tr>" ;
+                           "<button class='btn btn-danger' onclick='printElement("+res[0]+")'>Imprimir</button></td></tr>" ;
                        $("#tablaAlumnos").append(nuevafila);
                        i++;
                    }
@@ -384,7 +381,7 @@
             })
             .done(function(res){
                 $.jGrowl("Registro agregado con éxito", { header: 'Agregado' });
-                //setTimeout(location.reload.bind(location), 1500);
+                setTimeout(location.reload.bind(location), 1500);
             });
         });
     });
@@ -393,18 +390,4 @@
 <span id="resultado"></span>
 
 </body>
-<div id="myModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">¿Deseas imprimir este registro?</h4>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-info" data-dismiss="modal">NO</button>
-                <button type="button" class="btn btn-success" data-dismiss="modal" onclick="print()">SI</button>
-            </div>
-        </div>
-    </div>
-</div>
 </html>

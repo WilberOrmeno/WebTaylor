@@ -150,7 +150,7 @@
                             res[1] + "</td><td>" +
                             res[2] + "</td><td>" +
                             res[3] + "</td><td>" +
-                            /*res[4] */ '<form method="get" action="DocConvenios/Convenio3.docx">'+
+                            /* */ "<form method='get' action='"+res[4]+"'>" +
                             "<button type=\"submit\" class=\"btn btn-info\"><span class=\"glyphicon glyphicon-download-alt\"></span></button>\n" +
                             "</form></td><tr>";
                         $("#tabla").append(nuevafila);

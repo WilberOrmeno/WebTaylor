@@ -48,9 +48,8 @@
             <td><?php echo $row['docente']; ?></td>
             <td><?php echo $row['periodo']; ?></td>
             <td><?php echo $row['creditos']; ?></td>
-            <td><button type="button" class="btn btn-info" onclick="printElement(<?php echo $row['id']?>)">Imprimir</button></td>
+            <td><button type="button" class="btn btn-danger" onclick="printElement(<?php echo $row['id']?>)">Imprimir</button></td>
             <div id="<?php echo "printThis".$row['id'] ?>" style="display: block; position: absolute; z-index: -19; width: 900px; top: 50px;">
-                <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="col-xs-12 col-sm-12 text-center">
